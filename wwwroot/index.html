@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/libs/requirejs/require.js"></script>
+    <script>
+        require.config({
+            paths: {
+                "koExtensions":"/libs/koExtensions",
+                "siPortal": "/libs/siPortal",
+                "template": "/libs/koExtensions/template",
+                "stringTemplateEngine": "/libs/koExtensions/stringTemplateEngine",
+                "text": "/libs/text/text",
+                "knockout":"/libs/knockout/knockout",
+            }
+        });
+
+        require(["siPortal/siPortalLoader", "examples/hello-world/helloWorldLayout", "koExtensions/verboseConsoleBindingErrorReporter"], function (loader, helloWorldLayout) {
+
+            var root = new loader(
+                {
+                    rootLayout: new helloWorldLayout(),
+                });
+            
+        });       
+    </script>
+</head>
+<body>
+    <!-- siLayout: $data -->
+</body>
+</html>
