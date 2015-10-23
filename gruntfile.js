@@ -19,7 +19,7 @@ module.exports = function (grunt) {
         },
         watch: { /* when typescritp files are compiled with vs, then sync to wwwroot */
             default: {
-                files: ["artifacts/dev/**/*"],
+                files: ["artifacts/dev/**/*", "src/**/content/**/*", "src/**/templates/**/*"],
                 tasks: ["sync:default"],
                 options: {
                     debounceDelay: 100,
@@ -32,7 +32,12 @@ module.exports = function (grunt) {
                     cwd: "artifacts/dev",
                     src: ["**/*"],
                     dest: "wwwroot/libs",
-                }],
+                }, {
+                    cwd: "src/",
+                    src: ["**/content/**/*", "**/templates/**/*"],
+                    dest : "wwwroot/libs"
+                }
+                ],
                 pretend: false,
                 verbose: true
             }

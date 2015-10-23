@@ -1,6 +1,6 @@
 ﻿
 interface KnockoutBindingHandlers {
-    siLayout: KnockoutBindingHandler;
+    koLayout: KnockoutBindingHandler;
     singleClick: KnockoutBindingHandler;
 }
 
@@ -20,6 +20,8 @@ interface KnockoutStatic {
     requireTextObservable: (txt: string) => KnockoutObservable<string>;
 
     templates: { [name: string]: string };
+
+    isObservable<T>(instance: any): instance is KnockoutObservable<T> | KnockoutObservableArray<T>;
 }
 
 interface KnockoutBindingContext {

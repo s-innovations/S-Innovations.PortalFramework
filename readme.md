@@ -21,7 +21,13 @@ The siPortal project also has some cool knockout extensions that I digged up acc
 ## Visual Studio 15
 I am using visual studio 15 as my IDE and will provide some get started information at some point to crate a typescript project in VS2015. In Typescript 1.5 the tsconfig.json was introduced and updated further in 1.6, which is what I will use in VS2015 in contrast to the vs2013 where it was part of the vsproj file.
 
-##Typescript and AMD modules
+### Support for less
+With VS 2015 Web Essential is split into multiple extensions, http://madskristensen.net/post/bundling-minification-and-client-side-compilation, you can download the Web Compiler extension from here, https://visualstudiogallery.msdn.microsoft.com/3b329021-cd7a-4a01-86fc-714c2d05bb6c, and it also has details on how to use it. But we will also take a look at how to use the grunt tools to compile less.
+
+After right clicking a less file and enablign for compilation, a compilerconfig.json is added that is again manageble from the Task Runner Explore.
+
+
+## Typescript and AMD modules
 I been working with typescript the past 3 years and always been a big fan of AMD moduels and requirejs as my loader. Its has gotten more adorption over time. The main advantages of this is that we can modulalize our libraries and load on demand resources while still use build tools to compose optimized distributions of modules if needed.
 
 ## TSD (https://github.com/Definitelytyped/tsd)

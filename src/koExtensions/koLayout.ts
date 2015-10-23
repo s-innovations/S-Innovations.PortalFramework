@@ -2,7 +2,7 @@
 
 import ko = require("knockout");
 
-interface SILayout {
+interface koLayout {
 
     templateOptions(): KnockoutTemplateBindingHandlerOptions;
 
@@ -10,16 +10,16 @@ interface SILayout {
 
 
 
-ko.virtualElements.allowedBindings["siLayout"] = true;
+ko.virtualElements.allowedBindings["koLayout"] = true;
 
 var old : ()=>void = ko.bindingProvider.instance["preprocessNode"];
 ko.bindingProvider.instance["preprocessNode"] = function (node: HTMLElement) {
-    if (node.nodeType == 8) {    /* Comments looking for <!-- siLayout : propertyname --> */
-        var match = node.nodeValue.match(/^\s*siLayout\s*:([\s\S]+)/);
+    if (node.nodeType == 8) {    /* Comments looking for <!-- koLayout : propertyname --> */
+        var match = node.nodeValue.match(/^\s*koLayout\s*:([\s\S]+)/);
 
         if (match) {
 
-            var c1 = document.createComment(" ko siLayout: " + match[1]),
+            var c1 = document.createComment(" ko koLayout: " + match[1]),
                 c2 = document.createComment(" /ko ");
 
             node.parentNode.insertBefore(c1, node);
@@ -36,11 +36,11 @@ ko.bindingProvider.instance["preprocessNode"] = function (node: HTMLElement) {
 
 }
 
-ko.bindingHandlers.siLayout = {
+ko.bindingHandlers.koLayout = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
 
         var vm = valueAccessor();
-        var layout = ko.utils.unwrapObservable<SILayout>(vm);
+        var layout = ko.utils.unwrapObservable<koLayout>(vm);
 
 
         bindingContext.$tmpCtx = layout.templateOptions()
@@ -53,7 +53,7 @@ ko.bindingHandlers.siLayout = {
     update: function (element: HTMLElement, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
 
 
-        var layout = ko.utils.unwrapObservable<SILayout>(valueAccessor());
+        var layout = ko.utils.unwrapObservable<koLayout>(valueAccessor());
 
         if (layout === null)
             return;
@@ -67,4 +67,4 @@ ko.bindingHandlers.siLayout = {
 }
 
 
-export = SILayout;
+export = koLayout;

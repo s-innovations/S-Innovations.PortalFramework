@@ -1,5 +1,5 @@
 ﻿
-/// <amd-dependency path="./siLayout" />
+/// <amd-dependency path="koExtensions/koLayout" />
 
 import ko = require("knockout");
 

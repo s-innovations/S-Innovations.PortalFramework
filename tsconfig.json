@@ -7,10 +7,13 @@
     "module": "amd",
     "target": "es5",
     "rootDir": "src/",
-    "outDir": "artifacts/dev"
-  },
+    "outDir": "artifacts/dev",
+    "experimentalDecorators": true
+  }, 
+  "files": ["src/**/*.ts"],
   "exclude": [
     "node_modules",
-    "wwwroot"
+    "wwwroot",
+    "demos",
   ]
 }

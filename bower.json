@@ -1,7 +1,9 @@
 {
   "name": "SIPortal",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "classie": "~1.0.1"
+  },
   "devDependencies": {
     "knockout": "~3.3.0",
     "requirejs": "~2.1.20",
