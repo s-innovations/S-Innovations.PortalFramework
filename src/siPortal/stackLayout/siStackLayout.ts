@@ -8,7 +8,6 @@ import koLayout = require("koExtensions/koLayout");
 import SIItemLayout = require("siPortal/siItemLayout");
 import SIStackLayoutOrientation = require("./SIStackLayoutOrientation");
 import SIStackLayoutOptions = require("./SIStackLayoutOptions");
-import classDecorator = require("../decorators/classDecorator");
 import extend = require("utils/extend");
 
 

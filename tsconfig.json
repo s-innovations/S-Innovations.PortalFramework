@@ -2,6 +2,7 @@
   "compilerOptions": {
     "noImplicitAny": false,
     "noEmitOnError": true,
+    "declaration": true,
     "removeComments": false,
     "sourceMap": true,
     "module": "amd",
@@ -10,10 +11,9 @@
     "outDir": "artifacts/dev",
     "experimentalDecorators": true
   }, 
-  "files": ["src/**/*.ts"],
   "exclude": [
     "node_modules",
     "wwwroot",
-    "demos",
+    "demos"
   ]
 }

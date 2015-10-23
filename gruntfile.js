@@ -6,8 +6,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-bower-task');
     grunt.loadNpmTasks('grunt-sync');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-clean');
 
-    grunt.registerTask('devBuild', ["bower:install", "sync:default", "watch:default"]);
+    grunt.registerTask('devBuild', ["clean:dev", "bower:install", "sync:default", "watch:default"]);
 
     grunt.initConfig({
         bower: {
@@ -26,6 +27,9 @@ module.exports = function (grunt) {
                 },
             },
         },
+        clean: {
+            dev: ["artifacts", "wwwroot/libs"]
+        },
         sync: {
             default: {
                 files: [{
@@ -35,7 +39,7 @@ module.exports = function (grunt) {
                 }, {
                     cwd: "src/",
                     src: ["**/content/**/*", "**/templates/**/*"],
-                    dest : "wwwroot/libs"
+                    dest: "wwwroot/libs"
                 }
                 ],
                 pretend: false,
