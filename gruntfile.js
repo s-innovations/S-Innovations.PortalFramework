@@ -65,7 +65,7 @@ module.exports = function (grunt) {
                 name: 'si-portal-framework',
                 baseDir: 'artifacts/dev',
                 out: 'dist/typings/si-portal-framework.d.ts',
-                main: 'artifacts/dev/index',
+                main: 'si-portal-framework/index',
                 externs: ["./koExtensions/knockoutExtensions.d.ts", "./utils/utils.d.ts"]
                 
             },

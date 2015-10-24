@@ -145,6 +145,6 @@ declare module 'si-portal-framework/utils/utils' {
 
 }
 declare module 'si-portal-framework' {
-	import main = require('artifacts/dev/index');
+	import main = require('si-portal-framework/index');
 	export = main;
 }
