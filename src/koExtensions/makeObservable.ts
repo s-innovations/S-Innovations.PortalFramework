@@ -1,6 +1,6 @@
 
 import ko = require("knockout");
-import isArray = require("utils/isArray");
+import isArray = require("../utils/isArray");
 
 function makeObservable<T>(obj:
     T | Array<T> | KnockoutObservableArray<T> | KnockoutObservable<T>) :

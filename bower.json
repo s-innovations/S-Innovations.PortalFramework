@@ -1,17 +1,29 @@
 {
-  "name": "SIPortal",
+  "name": "si-portal-framework",
   "private": true,
   "dependencies": {
-    "classie": "~1.0.1"
-  },
-  "devDependencies": {
+    "classie": "~1.0.1",
     "knockout": "~3.3.0",
     "requirejs": "~2.1.20",
     "text": "requirejs-text#~2.0.14"
   },
+  "devDependencies": {
+  },
   "exportsOverride": {
-    "knockout": {
-      "": "dist/knockout.js"
+  },
+  "authors": [ "Poul Kjeldager Sørensen" ],
+  "homepage": "www.s-innovations.net",
+  "description": "A small framework for building web portals with knockoutjs",
+  "license": "MIT",
+  "ignore": [    
+    "artifacts/**/*",
+    "wwwroot/**/*",
+    "bower_components/**/*",
+    "node_modules/**/*",
+    "typings/**/*"
+  ],
+  "version": "0.0.1",
+  "typescript": {
+        "definition": "dist/typings/si-portal-framework.d.ts"
     }
-  }
 }

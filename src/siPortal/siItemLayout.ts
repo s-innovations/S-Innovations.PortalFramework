@@ -1,6 +1,6 @@
 
 import ko = require("knockout");
-import koLayout = require("koExtensions/koLayout");
+import koLayout = require("../koExtensions/koLayout");
 
 
 

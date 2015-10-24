@@ -7,13 +7,15 @@
     "sourceMap": true,
     "module": "amd",
     "target": "es5",
-    "rootDir": "src/",
+    "rootDir": "src",
     "outDir": "artifacts/dev",
     "experimentalDecorators": true
-  }, 
+  },
   "exclude": [
+    "artifacts",
     "node_modules",
+    "bower_components",
     "wwwroot",
-    "demos"
+    "dist"
   ]
 }

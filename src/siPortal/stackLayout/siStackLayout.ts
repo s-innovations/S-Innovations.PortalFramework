@@ -3,31 +3,13 @@
 /// <amd-dependency path="template!./templates/StackLayoutTemplate.html"/>
 
 import ko = require("knockout");
-import setDefaultProperties = require("utils/setDefaultProperties");
-import koLayout = require("koExtensions/koLayout");
-import SIItemLayout = require("siPortal/siItemLayout");
-import SIStackLayoutOrientation = require("./SIStackLayoutOrientation");
-import SIStackLayoutOptions = require("./SIStackLayoutOptions");
-import extend = require("utils/extend");
+import setDefaultProperties = require("../../utils/setDefaultProperties");
+import koLayout = require("../../koExtensions/koLayout");
+import SIItemLayout = require("../siItemLayout");
+import SIStackLayoutOrientation = require("./siStackLayoutOrientation");
+import SIStackLayoutOptions = require("./siStackLayoutOptions");
+import extend = require("../../utils/extend");
 
-
-function test(target: any, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<()=>string>) {
-  
-
-    console.log(this);
-    console.log(arguments);
-
-    console.log(descriptor.value);
-    //target.classes = ko.computed({
-    //    read: descriptor.get,
-    //    deferEvaluation: true
-    //    //disposeWhenNodeIsRemoved:el
-    //});
-
-    target.classes = ko.observable("a");
-  
-    
-}
 
 const SIStackLayoutOptionsDefaults: SIStackLayoutOptions = {
     elements: [],

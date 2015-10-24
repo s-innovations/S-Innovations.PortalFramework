@@ -1,6 +1,6 @@
 
-import koLayout = require("koExtensions/koLayout");
-import SIStackLayoutOrientation = require("./SIStackLayoutOrientation");
+import koLayout = require("../../koExtensions/koLayout");
+import SIStackLayoutOrientation = require("./siStackLayoutOrientation");
 import siItemLayoutOptions = require("../siItemLayoutOptions");
 
 interface SIStackLayoutOptions extends siItemLayoutOptions {

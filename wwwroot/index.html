@@ -2,30 +2,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="style.min.css" rel="stylesheet"/>
     <script src="/libs/requirejs/require.js"></script>
     <script>
         require.config({
             paths: {
+                "utils":"/libs/utils",
                 "koExtensions":"/libs/koExtensions",
                 "siPortal": "/libs/siPortal",
                 "template": "/libs/koExtensions/template",
                 "stringTemplateEngine": "/libs/koExtensions/stringTemplateEngine",
                 "text": "/libs/text/text",
-                "knockout":"/libs/knockout/knockout",
+                "knockout": "/libs/knockout/knockout",
+                "src": "/libs",
             }
         });
 
-        require(["siPortal/siPortalLoader", "examples/hello-world/helloWorldLayout", "koExtensions/verboseConsoleBindingErrorReporter"], function (loader, helloWorldLayout) {
 
-            var root = new loader(
-                {
-                    rootLayout: new helloWorldLayout(),
-                });
-            
-        });       
+        /// Hello World Demo
+
+        //require(["siPortal/siPortalLoader",
+        //    "examples/hello-world/helloWorldLayout",
+        //    "koExtensions/verboseConsoleBindingErrorReporter"],
+        //    function (loader, helloWorldLayout) {
+
+        //    var root = new loader(
+        //        {
+        //            rootLayout: new helloWorldLayout(),
+        //        });            
+        //    });
+
+        /// Azure Portal Demo
+        require(["siPortal/siPortalLoader",
+            "examples/azure-portal/AzurePortalLayout",
+            "examples/hello-world/helloWorldLayout",
+            "koExtensions/verboseConsoleBindingErrorReporter"],
+            function (loader, AzurePortalLayout, helloWorldLayout) {
+
+                var root = new loader(
+                    {
+                        rootLayout: new AzurePortalLayout({
+                            layout: new helloWorldLayout()
+                        }),
+                    });
+            });
+
+
     </script>
 </head>
-<body>
-    <!-- siLayout: $data -->
+<body class="si-theme-dark">
+    <!-- koLayout: $data -->
 </body>
 </html>
