@@ -34,21 +34,7 @@ module.exports = function (grunt) {
         clean: {
             dev: ["artifacts", "dist"]
         },
-        sync: {
-            //default: {
-            //    files: [{
-            //        cwd: "artifacts/dev",
-            //        src: ["**/*"],
-            //        dest: "wwwroot/libs",
-            //    }, {
-            //        cwd: "src/",
-            //        src: ["**/content/**/*", "**/templates/**/*"],
-            //        dest: "wwwroot/libs"
-            //    }
-            //    ],
-            //    pretend: false,
-            //    verbose: true
-            //},
+        sync: {           
             default: {
                 files: [{
                     cwd: "src",
