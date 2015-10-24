@@ -54,6 +54,16 @@ module.exports = function (grunt) {
                     cwd: "src",
                     src: ["**/*.d.ts"],
                     dest: "dist/typings",
+                },
+                {
+                    cwd: "src",
+                    src: ["**/*.less", "**/*.html"],
+                    dest: "dist/src",
+                },
+                {
+                    cwd: "artifacts/dev",
+                    src: ["**/*.js"],
+                    dest: "dist/src",
                 }
                 ],
                 pretend: false,
