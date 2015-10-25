@@ -7,7 +7,7 @@ ko.bindingHandlers.singleClick = {
             delay = 100,
             clickTimeout = true;
 
-        $(element).click(function () {
+        element.addEventListener('click', function () {
             if (clickTimeout) {
                 clickTimeout = false;
                 handler.call(viewModel, arguments);
@@ -15,6 +15,7 @@ ko.bindingHandlers.singleClick = {
                     clickTimeout = true;
                 }, delay);
             }
-        });
+        },true);
     }
 };
+
