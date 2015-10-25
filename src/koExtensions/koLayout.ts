@@ -2,6 +2,7 @@
 
 
 import ko = require("knockout");
+import isDefined = require("../utils/isDefined");
 
 interface koLayout {
 
@@ -43,27 +44,29 @@ ko.bindingHandlers.koLayout = {
         var vm = valueAccessor();
         var layout = ko.utils.unwrapObservable<koLayout>(vm);
 
+        if (isDefined(layout)) {
 
-        bindingContext.$tmpCtx = layout.templateOptions()
-   
-            
-        return ko.bindingHandlers.template.init.apply(this, [
-            element, () => bindingContext.$tmpCtx, allBindingsAccessor, viewModel, bindingContext
-        ]);
+            bindingContext.$tmpCtx = layout.templateOptions();
+
+
+            return ko.bindingHandlers.template.init.apply(this, [
+                element, () => bindingContext.$tmpCtx, allBindingsAccessor, viewModel, bindingContext
+            ]);
+        } else {
+            console.log("WARNING : binding element was undefined");
+        }
     },
     update: function (element: HTMLElement, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
 
 
         var layout = ko.utils.unwrapObservable<koLayout>(valueAccessor());
 
-        if (layout === null)
-            return;
+        if (isDefined(layout)) {
 
-
-
-        return ko.bindingHandlers.template.update.apply(this, [
-            element, () => bindingContext.$tmpCtx, allBindingsAccessor, viewModel, bindingContext
-        ]);
+            return ko.bindingHandlers.template.update.apply(this, [
+                element, () => bindingContext.$tmpCtx, allBindingsAccessor, viewModel, bindingContext
+            ]);
+        }
     }
 }
 
