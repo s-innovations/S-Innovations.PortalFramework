@@ -9,6 +9,23 @@ I hope that this project can be inspiration for working with Typescript and crea
 
 The first three goals of the project is to bring in the generic knockout extensions I always use aswell as keeping this readme informative - and to make a nice project structure and work environment within VS 2015.
 
+## Project structure
+
+```
+.
++-- tsconfig.json
++-- tsd.json
++-- project.json
++-- package.json
++-- bower.json
++-- typings/        (TSD outputted typescript definition files used for development in source) 
+|   +--             
++-- src/            (The folder of all active development. All files here are editable.)
++-- dist/           (The generated folder that can be consumed when importing the respository with bower)
+|   +-- src/        (The compiled typescript files, templates and less files - for doing custom bundlings of single javascript files. Note that each class, function and modules are created in each own file using AMD modules)
+|   +-- typings/    (The folder with all .d.ts files needed for typescript development)       
++-- artifacts/      (The generated folder which build artifacts are put in)
+```
 
 ## Knockout
 I know angular exists, and this is not an attempt to create another stack like angular. Angular takes care of everything, this library is mostly about composing a UI portal using ViewModels and templates and build a good fundation to build ontop of, by using knockoutjs.
