@@ -80,6 +80,13 @@ declare module 'si-portal-framework/index' {
 	export import siPortal = require('si-portal-framework/siPortal/siPortal');
 
 }
+declare module 'si-portal-framework/koExtensions/TOGuard' {
+	interface TOGuard<T, O> {
+	    (o: T | O): o is T;
+	}
+	export = TOGuard;
+
+}
 declare module 'si-portal-framework/koExtensions/makeObservable' {
 	 function makeObservable<T>(obj: T | Array<T> | KnockoutObservableArray<T> | KnockoutObservable<T>): KnockoutObservableArray<T> | KnockoutObservable<T>;
 	export = makeObservable;
@@ -117,6 +124,18 @@ declare module 'si-portal-framework/siPortal/rootLayouts/webContainerLayout' {
 	export = WebContainerLayout;
 
 }
+declare module 'si-portal-framework/utils/constructorGuard' {
+	interface constructorGuard<T, O> {
+	    (o: T | O): o is T;
+	}
+	export = constructorGuard;
+
+}
+declare module 'si-portal-framework/utils/constructorMapper' {
+	import TOGuard = require('si-portal-framework/utils/constructorGuard'); function constructorMapper<VM, VMOptions>(guard: TOGuard<VM, VMOptions>, ctor: new (p: VMOptions) => VM): (o: Array<VM | VMOptions> | VM | VMOptions) => Array<VM> | VM;
+	export = constructorMapper;
+
+}
 declare module 'si-portal-framework/utils/extend' {
 	 function extend(...args: Array<any>): any;
 	export = extend;
@@ -133,15 +152,8 @@ declare module 'si-portal-framework/utils/isDefined' {
 
 }
 declare module 'si-portal-framework/utils/setDefaultProperties' {
-	 function setDefaultProperties(obj: any, props: any, defaults: any): void;
+	 function setDefaultProperties(obj: any, props: any, defaults: any, mapper?: any): void;
 	export = setDefaultProperties;
-
-}
-declare module 'si-portal-framework/utils/utils' {
-	export import extend = require('si-portal-framework/utils/extend');
-	export import isArray = require('si-portal-framework/utils/isArray');
-	export import isDefined = require('si-portal-framework/utils/isDefined');
-	export import setDefaultProperties = require('si-portal-framework/utils/setDefaultProperties');
 
 }
 declare module 'si-portal-framework' {

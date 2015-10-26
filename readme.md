@@ -27,6 +27,52 @@ The first three goals of the project is to bring in the generic knockout extensi
 +-- artifacts/      (The generated folder which build artifacts are put in)
 ```
 
+## Seperation of concerns
+This framework is intended to give the tools needed to work with the design principle of sepration of concernts. Meaning it advertise the concepts of Model, View and ViewModel by adding a concepts of Layouts. We know what a Model is, aswell as what a View is. The viewmodel is also known to most, but in my words it is the components that takes a model and provdie some extended behaviors ontop of it for the view to comunicate with. In practise we can see this as, the model being the response coming from a JSON web service, the viewmodel being the extended model that in this case uses knockoutjs to create observable properties such the view can interact with the model and possible update it. The view is just html markup, in these cases put in seperate files and loaded with a tool called requirejs and its text plugin.
+
+What this framework is added to the above definition of MVVM, is the concept of a Layout - a Layouts concern is about binding together a ViewModel with a Template and can provide extended functionality that has only to do with rendering. In normal MVVM, the functionality in a layout would fit under the ViewModel.
+
+Disclaimer: I dont work for microsoft and this has nothing to do with their azure portal - this is an example of how one could create similar layout.
+
+### Examples:
+From the [demo projects](https://github.com/s-innovations/SiPortalFrameworkDemos) one can see the AzurePortal demo which has implemented the SideBar used in the new azure portal.
+
+The index.html page will have a [very empty body](https://github.com/s-innovations/SiPortalFrameworkDemos/blob/master/AzurePortal/wwwroot/index.html#L37), which is one of the goals of the library to move layouts into code such one can compose a layout using javascript and even possible later from a json markup.
+```
+<body class="si-theme-dark">
+    <!-- koLayout: $data -->
+</body>
+```
+which will use `ko.applyBindings` and the binding handler extension (koLayout)[https://github.com/s-innovations/S-Innovations.PortalFramework/blob/master/src/koExtensions/koLayout.ts#L40] that is part of this library.
+
+The root layout of the Azure Portal Demo looks like (this)[https://github.com/s-innovations/SiPortalFrameworkDemos/blob/master/AzurePortal/src/azure-portal/AzurePortalLayout.ts]
+```
+class AzurePortalLayout extends WebContainerLayout {
+    constructor(opt?) {
+        super({
+            layout: new SIStackLayout({
+                classes : ["portal-main"],
+                orientation: SIStackLayoutOrientation.horizontal,
+                elements: [new AzurePortalSideBarLayout(
+                    {
+                        collapsed: false,
+                        favorites: {
+                            favorites: [
+                                { opensExternal: true, label: "Test 1", uri: "#/Test1" },
+                                { opensExternal: true, label: "Test 2", uri: "#/Test2" },
+                                { opensExternal: true, label: "Test 3", uri: "#/Test3" },
+                                { opensExternal: true, label: "Test 4", uri: "#/Test4" },
+                                { opensExternal: true, label: "Test 5", uri: "#/Test5" },
+                            ]
+                        }
+                    }
+                )]
+            })            
+        });           
+    }
+}
+```
+
 ## Knockout
 I know angular exists, and this is not an attempt to create another stack like angular. Angular takes care of everything, this library is mostly about composing a UI portal using ViewModels and templates and build a good fundation to build ontop of, by using knockoutjs.
 
