@@ -16,11 +16,9 @@
   "description": "A small framework for building web portals with knockoutjs",
   "license": "MIT",
   "ignore": [    
-    "artifacts/**/*",
-    "wwwroot/**/*",
-    "bower_components/**/*",
-    "node_modules/**/*",
-    "typings/**/*"
+    "*",
+    "!dist/",
+    "!dist/*"
   ],
   "version": "0.0.1",
   "typescript": {
