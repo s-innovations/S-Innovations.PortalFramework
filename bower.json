@@ -17,8 +17,7 @@
   "license": "MIT",
   "ignore": [    
     "*",
-    "!dist/",
-    "!dist/*"
+    "!dist/**/*"
   ],
   "version": "0.0.1",
   "typescript": {
