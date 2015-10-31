@@ -80,13 +80,6 @@ declare module 'si-portal-framework/index' {
 	export import siPortal = require('si-portal-framework/siPortal/siPortal');
 
 }
-declare module 'si-portal-framework/koExtensions/TOGuard' {
-	interface TOGuard<T, O> {
-	    (o: T | O): o is T;
-	}
-	export = TOGuard;
-
-}
 declare module 'si-portal-framework/koExtensions/makeObservable' {
 	 function makeObservable<T>(obj: T | Array<T> | KnockoutObservableArray<T> | KnockoutObservable<T>): KnockoutObservableArray<T> | KnockoutObservable<T>;
 	export = makeObservable;
@@ -109,6 +102,9 @@ declare module 'si-portal-framework/koExtensions/template' {
 	};
 	export = loader;
 
+}
+interface String {
+    startsWith(str: any): boolean;
 }
 declare module 'si-portal-framework/siPortal/rootLayouts/webContainerLayout' {
 	import koLayout = require('si-portal-framework/koExtensions/koLayout'); class WebContainerLayout implements koLayout {
@@ -142,13 +138,23 @@ declare module 'si-portal-framework/utils/extend' {
 
 }
 declare module 'si-portal-framework/utils/isArray' {
-	 var isArray: (arg: any) => arg is any[];
+	 var isArray: {
+	    (arg: any): arg is any[];
+	    <T>(arg: any): arg is T[];
+	};
 	export = isArray;
 
 }
 declare module 'si-portal-framework/utils/isDefined' {
 	 function isDefined(variable: any): boolean;
 	export = isDefined;
+
+}
+declare module 'si-portal-framework/utils/makeModulePath' {
+	 function makeModulePath(module: {
+	    id: string;
+	}, path: string): string;
+	export = makeModulePath;
 
 }
 declare module 'si-portal-framework/utils/setDefaultProperties' {

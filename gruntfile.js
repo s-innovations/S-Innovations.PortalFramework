@@ -10,15 +10,28 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('dts-generator');
+    grunt.loadNpmTasks("grunt-ts");
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
 
     grunt.registerTask('devAfterBuild', ["sync:default", "dtsGenerator:default"]);
     grunt.registerTask('devWatch', ["devAfterBuild", "watch:default"]);
+    grunt.registerTask("devBuildAndTest", ["devAfterBuild", "jasmine:tests"]);
+    grunt.registerTask("distBuild", ["clean:dev", "ts:distBuild", "devBuildAndTest"]);
 
     grunt.initConfig({
+        ts: {
+            distBuild : {
+                tsconfig: true,
+                options: {
+                    fast: "never",
+                }
+            }
+        },
         bower: {
             install: {
                 options: {
                     targetDir: "wwwroot/libs",
+                    
                 }
             }
         },
@@ -34,7 +47,7 @@ module.exports = function (grunt) {
         clean: {
             dev: ["artifacts", "dist"]
         },
-        sync: {           
+        sync: {
             default: {
                 files: [{
                     cwd: "src",
@@ -63,10 +76,28 @@ module.exports = function (grunt) {
                 out: 'dist/typings/si-portal-framework.d.ts',
                 main: 'si-portal-framework/index',
                 externs: ["./koExtensions/knockoutExtensions.d.ts", "./utils/utils.d.ts"]
-                
+
             },
             default: {
                 src: ['artifacts/dev/**/*.d.ts']
+            }
+        },
+        jasmine: {
+            tests: {
+                src: [],
+                options: {
+                    specs: ['tests/**/*.js'],
+                    //     vendor: "node_modules/**/*.js",
+                    template: require('grunt-template-jasmine-requirejs'),
+                    templateOptions: {
+                        requireConfig: {
+                            //   baseUrl: '.grunt/grunt-contrib-jasmine/src/main/js/'
+                            paths: {
+                                "si-portal-framework": "artifacts/dev"
+                            }
+                        }
+                    }
+                }
             }
         }
     });

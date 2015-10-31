@@ -1,7 +1,5 @@
-define(["require", "exports", "./extend", "./isArray", "./isDefined", "./setDefaultProperties"], function (require, exports, extend, isArray, isDefined, setDefaultProperties) {
-    exports.extend = extend;
-    exports.isArray = isArray;
-    exports.isDefined = isDefined;
-    exports.setDefaultProperties = setDefaultProperties;
-});
+//export import extend = require("./extend");
+//export import isArray = require("./isArray");
+//export import isDefined = require("./isDefined");
+//export import setDefaultProperties = require("./setDefaultProperties");
 //# sourceMappingURL=utils.js.map

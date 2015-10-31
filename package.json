@@ -8,11 +8,14 @@
     "grunt": "^0.4.5",
     "grunt-bower-task": "^0.4.0",
     "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-jasmine": "^0.9.2",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-dts-bundle": "^0.3.0",
-    "grunt-sync": "^0.4.1"
+    "grunt-sync": "^0.4.1",
+    "grunt-template-jasmine-requirejs": "^0.2.3",
+    "grunt-ts": "^5.1.0"
   },
   "typescript": {
-      "definition": "./dist/typings/si-portal-framework.d.ts"
+    "definition": "./dist/typings/si-portal-framework.d.ts"
   }
 }

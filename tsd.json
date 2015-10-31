@@ -13,6 +13,9 @@
     },
     "jquery/jquery.d.ts": {
       "commit": "98a9440752f3f2ad7786aba1bf9bdefec818919e"
+    },
+    "jasmine/jasmine.d.ts": {
+      "commit": "eb59a40d3c2f3257e34ec2ede181046230814a41"
     }
   }
 }

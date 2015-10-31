@@ -1,4 +1,4 @@
-define(["require", "exports", "knockout"], function (require, exports, ko) {
+define(["require", "exports", "knockout", "../utils/isDefined"], function (require, exports, ko, isDefined) {
     ko.virtualElements.allowedBindings["koLayout"] = true;
     var old = ko.bindingProvider.instance["preprocessNode"];
     ko.bindingProvider.instance["preprocessNode"] = function (node) {
@@ -20,18 +20,23 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
         init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
             var vm = valueAccessor();
             var layout = ko.utils.unwrapObservable(vm);
-            bindingContext.$tmpCtx = layout.templateOptions();
-            return ko.bindingHandlers.template.init.apply(this, [
-                element, function () { return bindingContext.$tmpCtx; }, allBindingsAccessor, viewModel, bindingContext
-            ]);
+            if (isDefined(layout)) {
+                bindingContext.$tmpCtx = layout.templateOptions();
+                return ko.bindingHandlers.template.init.apply(this, [
+                    element, function () { return bindingContext.$tmpCtx; }, allBindingsAccessor, viewModel, bindingContext
+                ]);
+            }
+            else {
+                console.log("WARNING : binding element was undefined");
+            }
         },
         update: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
             var layout = ko.utils.unwrapObservable(valueAccessor());
-            if (layout === null)
-                return;
-            return ko.bindingHandlers.template.update.apply(this, [
-                element, function () { return bindingContext.$tmpCtx; }, allBindingsAccessor, viewModel, bindingContext
-            ]);
+            if (isDefined(layout)) {
+                return ko.bindingHandlers.template.update.apply(this, [
+                    element, function () { return bindingContext.$tmpCtx; }, allBindingsAccessor, viewModel, bindingContext
+                ]);
+            }
         }
     };
 });
