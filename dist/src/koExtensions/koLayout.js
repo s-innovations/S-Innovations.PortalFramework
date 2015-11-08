@@ -20,6 +20,7 @@ define(["require", "exports", "knockout", "../utils/isDefined"], function (requi
         init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
             var vm = valueAccessor();
             var layout = ko.utils.unwrapObservable(vm);
+            delete bindingContext.$tmpCtx; //Remove parents generated ctx;
             if (isDefined(layout)) {
                 bindingContext.$tmpCtx = layout.templateOptions();
                 return ko.bindingHandlers.template.init.apply(this, [
@@ -33,8 +34,15 @@ define(["require", "exports", "knockout", "../utils/isDefined"], function (requi
         update: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
             var layout = ko.utils.unwrapObservable(valueAccessor());
             if (isDefined(layout)) {
+                bindingContext.$tmpCtx = bindingContext.$tmpCtx || layout.templateOptions();
                 return ko.bindingHandlers.template.update.apply(this, [
                     element, function () { return bindingContext.$tmpCtx; }, allBindingsAccessor, viewModel, bindingContext
+                ]);
+            }
+            else {
+                //Clean out template
+                return ko.bindingHandlers.template.update.apply(this, [
+                    element, function () { return { if: false }; }, allBindingsAccessor, viewModel, bindingContext
                 ]);
             }
         }

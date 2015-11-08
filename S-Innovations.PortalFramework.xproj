@@ -18,5 +18,12 @@
   <PropertyGroup>
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
   </PropertyGroup>
+  <ItemGroup>
+    <DnxInvisibleFolder Include=".git\" />
+    <DnxInvisibleFolder Include=".vs\" />
+    <DnxInvisibleFolder Include="artifacts\" />
+    <DnxInvisibleFolder Include="bower_components\" />
+    <DnxInvisibleFolder Include="dist\" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

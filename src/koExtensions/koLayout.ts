@@ -44,16 +44,15 @@ ko.bindingHandlers.koLayout = {
         var vm = valueAccessor();
         var layout = ko.utils.unwrapObservable<koLayout>(vm);
 
-        if (isDefined(layout)) {
-
-            bindingContext.$tmpCtx = layout.templateOptions();
-
-
+        delete bindingContext.$tmpCtx; //Remove parents generated ctx;
+        if (isDefined(layout)) {                                      
+            bindingContext.$tmpCtx = layout.templateOptions();        
             return ko.bindingHandlers.template.init.apply(this, [
                 element, () => bindingContext.$tmpCtx, allBindingsAccessor, viewModel, bindingContext
             ]);
         } else {
             console.log("WARNING : binding element was undefined");
+
         }
     },
     update: function (element: HTMLElement, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
@@ -62,9 +61,14 @@ ko.bindingHandlers.koLayout = {
         var layout = ko.utils.unwrapObservable<koLayout>(valueAccessor());
 
         if (isDefined(layout)) {
-
+            bindingContext.$tmpCtx = bindingContext.$tmpCtx || layout.templateOptions();
             return ko.bindingHandlers.template.update.apply(this, [
                 element, () => bindingContext.$tmpCtx, allBindingsAccessor, viewModel, bindingContext
+            ]);
+        } else {    
+            //Clean out template
+            return ko.bindingHandlers.template.update.apply(this, [
+                element, function () { return { if: false } }, allBindingsAccessor, viewModel, bindingContext
             ]);
         }
     }
