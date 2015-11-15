@@ -5,7 +5,7 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
             element.addEventListener('click', function () {
                 if (clickTimeout) {
                     clickTimeout = false;
-                    handler.call(viewModel, arguments);
+                    handler.apply(viewModel, arguments);
                     setTimeout(function () {
                         clickTimeout = true;
                     }, delay);

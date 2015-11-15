@@ -120,6 +120,23 @@ declare module 'si-portal-framework/siPortal/rootLayouts/webContainerLayout' {
 	export = WebContainerLayout;
 
 }
+declare module 'si-portal-framework/siPortal/stackLayout/siStackLayoutItem' {
+	import koLayout = require('si-portal-framework/koExtensions/koLayout'); class siStackLayoutItem implements koLayout {
+	    item: KnockoutObservable<koLayout>;
+	    private _div;
+	    constructor(options: {
+	        item: koLayout;
+	    });
+	    itemTemplateOptions(): KnockoutTemplateBindingHandlerOptions;
+	    templateOptions(): {
+	        nodes: HTMLDivElement[];
+	        data: siStackLayoutItem;
+	        as: string;
+	    };
+	}
+	export = siStackLayoutItem;
+
+}
 declare module 'si-portal-framework/utils/constructorGuard' {
 	interface constructorGuard<T, O> {
 	    (o: T | O): o is T;
