@@ -22,6 +22,7 @@ interface KnockoutStatic {
     templates: { [name: string]: string };
 
     isObservable<T>(instance: any): instance is KnockoutObservable<T> | KnockoutObservableArray<T>;
+    isSubscribable<T>(instance: any): instance is KnockoutSubscribable<T>;
 }
 
 interface KnockoutBindingContext {
