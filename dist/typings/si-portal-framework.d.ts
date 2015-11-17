@@ -81,7 +81,7 @@ declare module 'si-portal-framework/index' {
 
 }
 declare module 'si-portal-framework/koExtensions/makeObservable' {
-	 function makeObservable<T>(obj: T | Array<T> | KnockoutObservableArray<T> | KnockoutObservable<T>): KnockoutObservableArray<T> | KnockoutObservable<T>;
+	 function makeObservable<T>(obj: T | Array<T> | KnockoutObservableArray<T> | KnockoutObservable<T>): KnockoutSubscribable<T> | KnockoutSubscribable<T[]>;
 	export = makeObservable;
 
 }

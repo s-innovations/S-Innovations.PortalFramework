@@ -1,6 +1,6 @@
 define(["require", "exports", "knockout", "../utils/isArray"], function (require, exports, ko, isArray) {
     function makeObservable(obj) {
-        if (ko.isObservable(obj)) {
+        if (ko.isSubscribable(obj)) {
             return obj;
         }
         else {
