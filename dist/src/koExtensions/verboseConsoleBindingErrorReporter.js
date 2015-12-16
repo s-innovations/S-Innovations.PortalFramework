@@ -2,6 +2,7 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
     var existing = ko.bindingProvider.instance;
     ko.bindingProvider.instance = {
         nodeHasBindings: existing.nodeHasBindings,
+        getBindingAccessors: existing.getBindingAccessors,
         getBindings: function (node, bindingContext) {
             var bindings;
             try {
@@ -15,5 +16,6 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
             return bindings;
         }
     };
+    ko.bindingProvider.instance["preprocessNode"] = existing["preprocessNode"];
 });
 //# sourceMappingURL=verboseConsoleBindingErrorReporter.js.map

@@ -17,7 +17,7 @@ declare module 'si-portal-framework/siPortal/siItemLayout' {
 	    protected registerClass(getter: any): void;
 	    templateOptions(): {
 	        name: any;
-	        data: SIItemLayout;
+	        data: any;
 	    };
 	}
 	export = SIItemLayout;
@@ -114,7 +114,7 @@ declare module 'si-portal-framework/siPortal/rootLayouts/webContainerLayout' {
 	    });
 	    templateOptions(): {
 	        name: string;
-	        data: WebContainerLayout;
+	        data: any;
 	    };
 	}
 	export = WebContainerLayout;
@@ -130,7 +130,7 @@ declare module 'si-portal-framework/siPortal/stackLayout/siStackLayoutItem' {
 	    itemTemplateOptions(): KnockoutTemplateBindingHandlerOptions;
 	    templateOptions(): {
 	        nodes: HTMLDivElement[];
-	        data: siStackLayoutItem;
+	        data: any;
 	        as: string;
 	    };
 	}

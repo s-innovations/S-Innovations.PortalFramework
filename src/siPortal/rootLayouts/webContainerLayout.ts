@@ -21,7 +21,7 @@ class WebContainerLayout implements koLayout {
 
         return {
             name: "WebContainerLayoutTemplate",
-            data: this
+            data: <any>this
 
         };
     }

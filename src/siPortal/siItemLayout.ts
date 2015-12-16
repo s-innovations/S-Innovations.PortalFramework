@@ -44,7 +44,7 @@ class SIItemLayout implements koLayout {
 
         return {
             name: this._templateName,
-            data: this,
+            data: <any>this,
 
         };
     }

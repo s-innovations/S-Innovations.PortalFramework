@@ -1,6 +1,8 @@
 //Not really sure where I got this from (copy/paste from project to project)
 //Code converted to typescript.
 define(["require", "exports", "text", "knockout", "stringTemplateEngine"], function (require, exports, text, ko) {
+    /// <amd-dependency path="stringTemplateEngine" />
+    /// <amd-dependency path="text" name="text" />
     var loader = {
         load: function (name, req, load, config) {
             var onLoad = config.isBuild ? load : function (content) {

@@ -6,6 +6,7 @@
 declare var text: any;
 
 
+
 import ko = require("knockout");
 
 

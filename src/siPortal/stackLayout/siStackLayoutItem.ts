@@ -30,7 +30,7 @@ class siStackLayoutItem implements koLayout {
 
         return {
             nodes: [this._div],
-            data: this,
+            data: <any>this,
             as: "$StackLayoutItem"
         };
     }

@@ -2,10 +2,14 @@
 import ko = require("knockout");
 
 
+
+
     var existing = ko.bindingProvider.instance;
 
     ko.bindingProvider.instance = {
         nodeHasBindings: existing.nodeHasBindings,
+        getBindingAccessors: existing.getBindingAccessors,
+       
         getBindings: function (node, bindingContext) {
             var bindings;
             try {
@@ -20,3 +24,4 @@ import ko = require("knockout");
             return bindings;
         }
     };
+    ko.bindingProvider.instance["preprocessNode"] = existing["preprocessNode"];
