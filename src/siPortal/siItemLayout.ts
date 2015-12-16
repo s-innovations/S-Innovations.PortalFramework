@@ -1,15 +1,17 @@
 
 import ko = require("knockout");
 import koLayout = require("../koExtensions/koLayout");
-
+import siItemLayoutOptions = require("./siItemLayoutOptions");
 
 
 class SIItemLayout implements koLayout {
  
+    private _contextName;
     private _templateName;
     private _classes: Array<string>;
-    constructor(opt?) {
+    constructor(opt?: siItemLayoutOptions) {
         this._templateName = opt.templateName;
+        this._contextName = opt.contextName;
         this._classes = opt.classes || [];
     }
 
@@ -45,6 +47,7 @@ class SIItemLayout implements koLayout {
         return {
             name: this._templateName,
             data: <any>this,
+            as: this._contextName
 
         };
     }

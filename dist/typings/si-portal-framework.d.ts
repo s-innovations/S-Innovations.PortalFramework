@@ -7,17 +7,29 @@ declare module 'si-portal-framework/koExtensions/koLayout' {
 	export = koLayout;
 
 }
+declare module 'si-portal-framework/siPortal/siItemLayoutOptions' {
+	interface siItemLayoutOptions {
+	    classes?: Array<string>;
+	    templateName?: string;
+	    contextName?: string;
+	}
+	export = siItemLayoutOptions;
+
+}
 declare module 'si-portal-framework/siPortal/siItemLayout' {
-	import koLayout = require('si-portal-framework/koExtensions/koLayout'); class SIItemLayout implements koLayout {
+	import koLayout = require('si-portal-framework/koExtensions/koLayout');
+	import siItemLayoutOptions = require('si-portal-framework/siPortal/siItemLayoutOptions'); class SIItemLayout implements koLayout {
+	    private _contextName;
 	    private _templateName;
 	    private _classes;
-	    constructor(opt?: any);
+	    constructor(opt?: siItemLayoutOptions);
 	    private classRegistrations;
 	    private classes;
 	    protected registerClass(getter: any): void;
 	    templateOptions(): {
 	        name: any;
 	        data: any;
+	        as: any;
 	    };
 	}
 	export = SIItemLayout;
@@ -29,14 +41,6 @@ declare module 'si-portal-framework/siPortal/stackLayout/siStackLayoutOrientatio
 	    vertical = 1,
 	}
 	export = SIStackLayoutOrientation;
-
-}
-declare module 'si-portal-framework/siPortal/siItemLayoutOptions' {
-	interface siItemLayoutOptions {
-	    classes?: Array<string>;
-	    templateName?: string;
-	}
-	export = siItemLayoutOptions;
 
 }
 declare module 'si-portal-framework/siPortal/stackLayout/siStackLayoutOptions' {

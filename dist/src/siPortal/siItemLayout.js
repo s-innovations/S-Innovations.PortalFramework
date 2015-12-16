@@ -15,6 +15,7 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
                 deferEvaluation: true,
             });
             this._templateName = opt.templateName;
+            this._contextName = opt.contextName;
             this._classes = opt.classes || [];
         }
         SIItemLayout.prototype.registerClass = function (getter) {
@@ -29,6 +30,7 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
             return {
                 name: this._templateName,
                 data: this,
+                as: this._contextName
             };
         };
         return SIItemLayout;
