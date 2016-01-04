@@ -178,7 +178,3 @@ declare module 'si-portal-framework/utils/setDefaultProperties' {
 	export = setDefaultProperties;
 
 }
-declare module 'si-portal-framework' {
-	import main = require('si-portal-framework/index');
-	export = main;
-}

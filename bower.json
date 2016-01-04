@@ -19,7 +19,7 @@
     "*",
     "!dist/**/*"
   ],
-  "version": "0.8.0",
+  "version": "0.8.1",
   "typescript": {
         "definition": "dist/typings/si-portal-framework.d.ts"
     }
