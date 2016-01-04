@@ -3,8 +3,8 @@
   "private": true,
   "dependencies": {
     "classie": "~1.0.1",
-    "knockout": "~3.3.0",
-    "requirejs": "~2.1.20",
+    "knockout": "~3.4.0",
+    "requirejs": "~2.1.22",
     "text": "requirejs-text#~2.0.14"
   },
   "devDependencies": {
@@ -13,13 +13,13 @@
   },
   "authors": [ "Poul Kjeldager Sørensen" ],
   "homepage": "www.s-innovations.net",
-  "description": "A small framework for building web portals with knockoutjs",
+  "description": "A small framework for building web portals with knockoutjs and requirejs",
   "license": "MIT",
   "ignore": [    
     "*",
     "!dist/**/*"
   ],
-  "version": "0.0.1",
+  "version": "0.8.0",
   "typescript": {
         "definition": "dist/typings/si-portal-framework.d.ts"
     }

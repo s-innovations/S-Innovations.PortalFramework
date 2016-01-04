@@ -1,4 +1,4 @@
-﻿/// <binding AfterBuild='devAfterBuild' />
+﻿/// <binding AfterBuild='devAfterBuild' ProjectOpened='initProject' />
 
 /*
 This file in the main entry point for defining grunt tasks and using grunt plugins.
@@ -12,11 +12,13 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('dts-generator');
     grunt.loadNpmTasks("grunt-ts");
     grunt.loadNpmTasks('grunt-contrib-jasmine');
+    grunt.loadNpmTasks('grunt-tsd');
 
+    grunt.registerTask("initProject", ["clean:dev","bower:install", "tsd:refresh"]);
     grunt.registerTask('devAfterBuild', ["sync:default", "dtsGenerator:default"]);
     grunt.registerTask('devWatch', ["devAfterBuild", "watch:default"]);
     grunt.registerTask("devBuildAndTest", ["devAfterBuild", "jasmine:tests"]);
-    grunt.registerTask("distBuild", ["clean:dev", "ts:distBuild", "devBuildAndTest"]);
+    grunt.registerTask("distBuild", ["initProject", "ts:distBuild", "devBuildAndTest"]);
 
     grunt.initConfig({
         ts: {
@@ -99,7 +101,17 @@ module.exports = function (grunt) {
                     }
                 }
             }
-        }
+        },
+        tsd: {
+            'refresh': {
+                'options': {
+                    'command': 'reinstall',
+                    'latest': true,
+                    'config': 'tsd.json',
+                    'opts': {}
+                }
+            }
+        },
     });
 
     grunt.event.on('watch', function (action, filepath, target) {
