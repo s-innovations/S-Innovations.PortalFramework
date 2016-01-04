@@ -78,6 +78,11 @@ declare module 'si-portal-framework/oAuth/getStoredTokens' {
 	export default function getStoredTokens(ns: string): oAuthResult;
 
 }
+declare module 'si-portal-framework/oAuth/oAuthModule' {
+	 import oAuthClient from 'si-portal-framework/oAuth/oAuthClient'; import oAuthResult from 'si-portal-framework/oAuth/oAuthResult'; import getStoredTokens from 'si-portal-framework/oAuth/getStoredTokens';
+	export { oAuthClient, oAuthResult, getStoredTokens };
+
+}
 interface String {
     startsWith(str: any): boolean;
 }
