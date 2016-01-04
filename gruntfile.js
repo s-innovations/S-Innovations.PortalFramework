@@ -75,13 +75,19 @@ module.exports = function (grunt) {
             options: {
                 name: 'si-portal-framework',
                 baseDir: 'artifacts/dev',
+             //   project:"artifacts/dev",
+              //  src:["artifacts/dev/**/*.ts","typings/tsd.d.ts"],
                 out: 'dist/typings/si-portal-framework.d.ts',
+           //     exclude: ["typings/q/*.d.ts"],
+               
              //   main: 'si-portal-framework/index',
                 externs: ["./koExtensions/knockoutExtensions.d.ts", "./utils/utils.d.ts"]
 
             },
             default: {
-                src: ['artifacts/dev/**/*.d.ts']
+                src: ['artifacts/dev/**/*.d.ts'],
+                
+                
             }
         },
         jasmine: {

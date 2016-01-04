@@ -16,6 +16,9 @@
     },
     "jasmine/jasmine.d.ts": {
       "commit": "bdaf2f0eb19edee26248c80bab4947e9b70e4217"
+    },
+    "q/Q.d.ts": {
+      "commit": "bdaf2f0eb19edee26248c80bab4947e9b70e4217"
     }
   }
 }

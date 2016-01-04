@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>Untitled</title>
+    <script language="JavaScript" type="text/javascript">
+<!--
+        function gosomewhere(e) {
+
+          //  console.log([arguments, e.data, e.origin, e]);
+            window.sessionStorage.setItem("{{NS}}_origin", e.origin);
+            location.replace(e.data);
+       }
+
+        var parseResult = function(queryString) {
+            var params = {},
+
+                regex = /([^&=]+)=([^&]*)/g,
+                m;
+
+            while (m = regex.exec(queryString)) {
+                params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+            }
+
+            for (var prop in params) {
+                return params;
+            }
+        }
+        window.addEventListener('message', gosomewhere, false);
+
+
+        var parsed = parseResult((location.hash.substring(1)));
+        console.log(parsed);
+
+        if (parsed) {
+            console.log(["posting back", window.parent, window.opener, window.top]);
+            var parent = window.opener || window.parent || window.top;
+
+            parent.postMessage(parsed, window.sessionStorage.getItem("{{NS}}_origin"));
+
+        } else {
+            // we have to listen for 'message'
+
+
+
+            if (window.opener) {
+                window.opener.postMessage("loaded", window.opener.location.protocol + '//' + window.opener.location.host);
+            }
+        }
+//-->
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>

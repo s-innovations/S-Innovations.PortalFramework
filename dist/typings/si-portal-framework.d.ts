@@ -30,6 +30,54 @@ declare module 'si-portal-framework/koExtensions/template' {
 	export = loader;
 
 }
+declare module 'si-portal-framework/oAuth/implicitRequestOptions' {
+	interface implicitRequestOptions {
+	    responseType: string;
+	    prompt?: string;
+	    login_hint?: string;
+	    acr_values?: string;
+	    isSilence?: boolean;
+	}
+	export = implicitRequestOptions;
+
+}
+declare module 'si-portal-framework/oAuth/oAuthClient' {
+	import * as Q from "q"; import oAuthResult from 'si-portal-framework/oAuth/oAuthResult';
+	import implicitRequestOptions = require('si-portal-framework/oAuth/implicitRequestOptions');
+	export default class oAuthClient {
+	    url: any;
+	    constructor(url?: any);
+	    setUrl(url: any): void;
+	    createSilentImplicitFlow(clientid: any, callback: any, scope: any, responseType?: string): Q.Promise<{}>;
+	    createImplicitFlowRequest(clientid: any, callback: any, scope: any, options: implicitRequestOptions): {
+	        url: string;
+	        state: string;
+	        nonce: string;
+	    };
+	    parseResult(queryStringOrParams: any): oAuthResult;
+	}
+
+}
+declare module 'si-portal-framework/oAuth/oAuthResult' {
+	 import oAuthClient from 'si-portal-framework/oAuth/oAuthClient';
+	export default class oAuthResult {
+	    client: oAuthClient;
+	    constructor(client: oAuthClient, data: any);
+	    id_token: string;
+	    access_token: string;
+	    expires_in: number;
+	    scope: string;
+	    state: string;
+	    token_type: string;
+	    expires_at: number;
+	}
+
+}
+declare module 'si-portal-framework/oAuth/getStoredTokens' {
+	 import oAuthResult from 'si-portal-framework/oAuth/oAuthResult';
+	export default function getStoredTokens(ns: string): oAuthResult;
+
+}
 interface String {
     startsWith(str: any): boolean;
 }
@@ -134,6 +182,17 @@ declare module 'si-portal-framework/siPortal/stackLayout/siStackLayoutItem' {
 	    };
 	}
 	export = siStackLayoutItem;
+
+}
+declare module 'si-portal-framework/siStorage/siStorage' {
+	export default class siStorage<T> {
+	    private name;
+	    private store;
+	    private ns;
+	    constructor(name: string, store: Storage, ns?: string);
+	    get(): T;
+	    set(value?: T): void;
+	}
 
 }
 declare module 'si-portal-framework/utils/constructorGuard' {
