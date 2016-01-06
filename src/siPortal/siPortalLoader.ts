@@ -3,6 +3,7 @@
 import ko = require("knockout");
 import koLayout = require("../koExtensions/koLayout");
 import setDefaultProperties = require("../utils/setDefaultProperties");
+import {Middleware, compose, AppFunc, AppEnvironmnet} from "../appBuilder/appBuilder";
 
 
 class SIPortalLoader {
@@ -13,6 +14,9 @@ class SIPortalLoader {
 
     rootLayout: KnockoutObservable<koLayout>
 
+    protected middlewares: Array<Middleware> = [];
+    protected app: AppFunc;
+    
     constructor(data: { rootLayout?: koLayout } = {}) {
         setDefaultProperties(this, data, {
             rootLayout: undefined
@@ -28,6 +32,18 @@ class SIPortalLoader {
             ko.applyBindings(r);
         });
       
+    }
+    protected createAppEnvironment() : AppEnvironmnet {
+        var env = {
+            hash: this.hash(),
+            originalHash: location.hash,
+            route: this.route(),
+            params: this.params(),
+            loader: this,
+            "skipNextHashChange": this.skipNextHashChange
+        };
+
+        return env;
     }
     protected onHashChange() {
                      
@@ -56,10 +72,26 @@ class SIPortalLoader {
         this.hash(hash.toLowerCase());
         this.route(this.hash().substr(1).match(/[^/]+/g));
         this.params(params);
+
+
+        
+        var env = this.createAppEnvironment();
+        this.app(env);
+        this.skipNextHashChange = env["skipNextHashChange"];
+
     }
     initialize() {
+
+        this.app = compose(this.middlewares);
+
         window.addEventListener("hashchange", this.onHashChange.bind(this), false);
         this.onHashChange();
+    }
+
+    private skipNextHashChange;
+    cleanUpHash() {
+        this.skipNextHashChange = true;
+        location.hash = "";
     }
 }
 export = SIPortalLoader;   
