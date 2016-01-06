@@ -1,5 +1,39 @@
 /// <reference path="./koExtensions/knockoutExtensions.d.ts" />
 /// <reference path="./utils/utils.d.ts" />
+declare module 'si-portal-framework/appBuilder/compose' {
+	/**
+	 * Create a function to invoke all passed middleware functions
+	 * with a single argument and context
+	 * @param {...Array<Function>} middleware, groups of middleware functions
+	 * @return {Function} Invoke the middleware pipeline
+	 */
+	export function compose(...middleware: any[]): any;
+
+}
+declare module 'si-portal-framework/appBuilder/AppBuilder' {
+	 import {compose} from 'si-portal-framework/appBuilder/compose'; import {} from 'si-portal-framework/appBuilder/q';
+	interface AppEnvironmnet {
+	    hash: string;
+	    originalHash: string;
+	    route: string[];
+	    params: string;
+	    [key: string]: any;
+	}
+	interface AppFunc {
+	    (env: AppEnvironmnet): void;
+	}
+	interface Middleware {
+	    (env: AppEnvironmnet, next: AppFunc): void | Promise.IPromise<void>;
+	} class AppBuilder<T extends AppEnvironmnet> {
+	    private middleware;
+	    constructor();
+	    build(): any;
+	    use(mw: any): this;
+	}
+	export default function <T extends AppEnvironmnet>(): AppBuilder<T>;
+	export { compose, AppBuilder, AppFunc, AppEnvironmnet, Middleware };
+
+}
 declare module 'si-portal-framework/koExtensions/koLayout' {
 	interface koLayout {
 	    templateOptions(): KnockoutTemplateBindingHandlerOptions;
@@ -42,7 +76,7 @@ declare module 'si-portal-framework/oAuth/implicitRequestOptions' {
 
 }
 declare module 'si-portal-framework/oAuth/oAuthClient' {
-	import * as Q from "q"; import oAuthResult from 'si-portal-framework/oAuth/oAuthResult';
+	 import {} from 'si-portal-framework/oAuth/q'; import oAuthResult from 'si-portal-framework/oAuth/oAuthResult';
 	import implicitRequestOptions = require('si-portal-framework/oAuth/implicitRequestOptions');
 	export default class oAuthClient {
 	    url: any;
@@ -76,6 +110,14 @@ declare module 'si-portal-framework/oAuth/oAuthResult' {
 declare module 'si-portal-framework/oAuth/getStoredTokens' {
 	 import oAuthResult from 'si-portal-framework/oAuth/oAuthResult';
 	export default function getStoredTokens(ns: string): oAuthResult;
+
+}
+declare module 'si-portal-framework/oAuth/oAuthMiddleware' {
+	 import {AppEnvironmnet, AppFunc} from 'si-portal-framework/appBuilder/AppBuilder';
+	export interface oAuthAppEnvironment extends AppEnvironmnet {
+	    user: any;
+	}
+	export function oAuthMiddleware(envOrOptions: oAuthAppEnvironment | any, envOrNext: oAuthAppEnvironment | AppFunc, nextOrnull: AppFunc | void): void;
 
 }
 declare module 'si-portal-framework/oAuth/setToken' {
@@ -134,13 +176,21 @@ declare module 'si-portal-framework/siPortal/siItemLayout' {
 
 }
 declare module 'si-portal-framework/siPortal/siPortalLoader' {
-	 class SIPortalLoader {
+	import koLayout = require('si-portal-framework/koExtensions/koLayout'); import {Middleware, AppFunc, AppEnvironmnet} from 'si-portal-framework/appBuilder/appBuilder'; class SIPortalLoader {
 	    hash: KnockoutObservable<string>;
 	    route: KnockoutObservable<Array<string>>;
 	    params: KnockoutObservable<any>;
-	    constructor(data: any);
+	    rootLayout: KnockoutObservable<koLayout>;
+	    protected middlewares: Array<Middleware>;
+	    protected app: AppFunc;
+	    constructor(data?: {
+	        rootLayout?: koLayout;
+	    });
+	    protected createAppEnvironment(): AppEnvironmnet;
 	    protected onHashChange(): void;
 	    initialize(): void;
+	    private skipNextHashChange;
+	    cleanUpHash(): void;
 	}
 	export = SIPortalLoader;
 

@@ -6,19 +6,19 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "knockout/knockout.d.ts": {
-      "commit": "bdaf2f0eb19edee26248c80bab4947e9b70e4217"
+      "commit": "f11e49cfb77f99678657ddfe5d43017849675c64"
     },
     "requirejs/require.d.ts": {
-      "commit": "bdaf2f0eb19edee26248c80bab4947e9b70e4217"
+      "commit": "f11e49cfb77f99678657ddfe5d43017849675c64"
     },
     "jquery/jquery.d.ts": {
-      "commit": "bdaf2f0eb19edee26248c80bab4947e9b70e4217"
+      "commit": "f11e49cfb77f99678657ddfe5d43017849675c64"
     },
     "jasmine/jasmine.d.ts": {
-      "commit": "bdaf2f0eb19edee26248c80bab4947e9b70e4217"
+      "commit": "f11e49cfb77f99678657ddfe5d43017849675c64"
     },
     "q/Q.d.ts": {
-      "commit": "bdaf2f0eb19edee26248c80bab4947e9b70e4217"
+      "commit": "f11e49cfb77f99678657ddfe5d43017849675c64"
     }
   }
 }
