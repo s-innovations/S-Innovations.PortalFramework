@@ -1,7 +1,9 @@
 ﻿
-/// <amd-dependency path="../koExtensions/koLayout" />
 
 import ko = require("knockout");
+import koLayout = require("../koExtensions/koLayout");
+import setDefaultProperties = require("../utils/setDefaultProperties");
+
 
 class SIPortalLoader {
 
@@ -9,14 +11,22 @@ class SIPortalLoader {
     route: KnockoutObservable<Array<string>> = ko.observable([]);
     params = ko.observable<any>(null).extend({ rateLimit: 0 });
 
-    constructor(data) {
-           
+    rootLayout: KnockoutObservable<koLayout>
 
-        setTimeout(() => {
-            ko.applyBindings(data.rootLayout);
+    constructor(data: { rootLayout?: koLayout } = {}) {
+        setDefaultProperties(this, data, {
+            rootLayout: undefined
         });
+           
+        if (data.rootLayout) {
+            setTimeout(() => {
+                ko.applyBindings(data.rootLayout);
+            });
+        }
 
-
+        this.rootLayout.subscribe(r=> {
+            ko.applyBindings(r);
+        });
       
     }
     protected onHashChange() {
