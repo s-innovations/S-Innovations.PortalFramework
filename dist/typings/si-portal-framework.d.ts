@@ -11,7 +11,7 @@ declare module 'si-portal-framework/appBuilder/compose' {
 
 }
 declare module 'si-portal-framework/appBuilder/AppBuilder' {
-	 import {compose} from 'si-portal-framework/appBuilder/compose'; import {} from 'si-portal-framework/appBuilder/q';
+	 import {compose} from 'si-portal-framework/appBuilder/compose';
 	interface AppEnvironmnet {
 	    hash: string;
 	    originalHash: string;
@@ -23,7 +23,7 @@ declare module 'si-portal-framework/appBuilder/AppBuilder' {
 	    (env: AppEnvironmnet): void;
 	}
 	interface Middleware {
-	    (env: AppEnvironmnet, next: AppFunc): void | Promise.IPromise<void>;
+	    (env: AppEnvironmnet, next: AppFunc): void | Q.Promise<void>;
 	} class AppBuilder<T extends AppEnvironmnet> {
 	    private middleware;
 	    constructor();
@@ -76,7 +76,7 @@ declare module 'si-portal-framework/oAuth/implicitRequestOptions' {
 
 }
 declare module 'si-portal-framework/oAuth/oAuthClient' {
-	 import {} from 'si-portal-framework/oAuth/q'; import oAuthResult from 'si-portal-framework/oAuth/oAuthResult';
+	 import oAuthResult from 'si-portal-framework/oAuth/oAuthResult';
 	import implicitRequestOptions = require('si-portal-framework/oAuth/implicitRequestOptions');
 	export default class oAuthClient {
 	    url: any;
@@ -176,7 +176,7 @@ declare module 'si-portal-framework/siPortal/siItemLayout' {
 
 }
 declare module 'si-portal-framework/siPortal/siPortalLoader' {
-	import koLayout = require('si-portal-framework/koExtensions/koLayout'); import {Middleware, AppFunc, AppEnvironmnet} from 'si-portal-framework/appBuilder/appBuilder'; class SIPortalLoader {
+	import koLayout = require('si-portal-framework/koExtensions/koLayout'); import {Middleware, AppFunc, AppEnvironmnet} from 'si-portal-framework/appBuilder/AppBuilder'; class SIPortalLoader {
 	    hash: KnockoutObservable<string>;
 	    route: KnockoutObservable<Array<string>>;
 	    params: KnockoutObservable<any>;

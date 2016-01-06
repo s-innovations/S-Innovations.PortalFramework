@@ -1,5 +1,5 @@
 import { compose } from './compose'
-import * as Promise from "q";
+
 
 interface AppEnvironmnet {
     hash: string
@@ -14,7 +14,7 @@ interface AppFunc {
 }
 
 interface Middleware {
-    (env: AppEnvironmnet, next: AppFunc): void | Promise.IPromise<void>;
+    (env: AppEnvironmnet, next: AppFunc): void | Q.Promise<void>;
 }
 
 class AppBuilder<T extends AppEnvironmnet> {

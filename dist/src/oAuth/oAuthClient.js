@@ -1,4 +1,4 @@
-define(["require", "exports", "q", "./oAuthResult"], function (require, exports, Q, oAuthResult_1) {
+define(["require", "exports", "q", "./oAuthResult"], function (require, exports, q_1, oAuthResult_1) {
     var oAuthClient = (function () {
         function oAuthClient(url) {
             this.url = url;
@@ -10,7 +10,7 @@ define(["require", "exports", "q", "./oAuthResult"], function (require, exports,
             if (responseType === void 0) { responseType = "token"; }
             if (!this.url)
                 throw new Error();
-            var deferred = Q.defer();
+            var deferred = q_1.defer();
             var request = this.createImplicitFlowRequest(clientid, callback, scope, { responseType: responseType, prompt: "none", isSilence: true });
             //  var iframe: JQuery = null;
             var iframe;

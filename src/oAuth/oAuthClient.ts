@@ -1,5 +1,5 @@
 
-import * as Q from "q";
+import {defer} from "q";
 import oAuthResult from "./oAuthResult";
 import implicitRequestOptions = require("./implicitRequestOptions");
 
@@ -17,7 +17,7 @@ export default class oAuthClient {
         if (!this.url)
             throw new Error();
 
-        var deferred = Q.defer();
+        var deferred = defer();
 
         var request = this.createImplicitFlowRequest(clientid, callback, scope, { responseType: responseType, prompt: "none", isSilence: true });
 

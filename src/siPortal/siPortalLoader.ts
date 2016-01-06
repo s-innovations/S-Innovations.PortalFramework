@@ -3,7 +3,7 @@
 import ko = require("knockout");
 import koLayout = require("../koExtensions/koLayout");
 import setDefaultProperties = require("../utils/setDefaultProperties");
-import {Middleware, compose, AppFunc, AppEnvironmnet} from "../appBuilder/appBuilder";
+import {Middleware, compose, AppFunc, AppEnvironmnet} from "../appBuilder/AppBuilder";
 
 
 class SIPortalLoader {

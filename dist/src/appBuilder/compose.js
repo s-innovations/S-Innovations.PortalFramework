@@ -1,4 +1,4 @@
-define(["require", "exports", "q"], function (require, exports, Promise) {
+define(["require", "exports", "q"], function (require, exports, Q) {
     function throwIfHasBeenCalled(fn) {
         if (fn._called) {
             throw new Error('Cannot call next more than once');
@@ -12,14 +12,14 @@ define(["require", "exports", "q"], function (require, exports, Promise) {
         return x;
     }
     function tryInvokeMiddleware(context, middleware, next) {
-        if (next === void 0) { next = function () { return Promise.resolve(null); }; }
+        if (next === void 0) { next = function () { return Q.resolve(null); }; }
         try {
             return middleware
-                ? Promise.resolve(middleware(context, next))
-                : Promise.resolve(context);
+                ? Q.resolve(middleware(context, next))
+                : Q.resolve(context);
         }
         catch (error) {
-            return Promise.reject(error);
+            return Q.reject(error);
         }
     }
     function middlewareReducer(composed, mw) {

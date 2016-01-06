@@ -1,5 +1,5 @@
 
-import * as Promise from "q";
+import * as Q from "q";
 
 function throwIfHasBeenCalled(fn) {
     if (fn._called) {
@@ -15,13 +15,13 @@ function throwIfNotFunction(x) {
     return x
 }
 
-function tryInvokeMiddleware(context, middleware, next = () => Promise.resolve(null)) {
+function tryInvokeMiddleware(context, middleware, next = () => Q.resolve(null)) {
     try {
         return middleware
-            ? Promise.resolve(middleware(context, next))
-            : Promise.resolve(context)
+            ? Q.resolve(middleware(context, next))
+            : Q.resolve(context)
     } catch (error) {
-        return Promise.reject(error)
+        return Q.reject(error)
     }
 }
 

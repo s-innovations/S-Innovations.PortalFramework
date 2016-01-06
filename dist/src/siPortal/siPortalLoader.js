@@ -1,4 +1,4 @@
-define(["require", "exports", "knockout", "../utils/setDefaultProperties", "../appBuilder/appBuilder"], function (require, exports, ko, setDefaultProperties, appBuilder_1) {
+define(["require", "exports", "knockout", "../utils/setDefaultProperties", "../appBuilder/AppBuilder"], function (require, exports, ko, setDefaultProperties, AppBuilder_1) {
     var SIPortalLoader = (function () {
         function SIPortalLoader(data) {
             if (data === void 0) { data = {}; }
@@ -53,7 +53,7 @@ define(["require", "exports", "knockout", "../utils/setDefaultProperties", "../a
             this.skipNextHashChange = env["skipNextHashChange"];
         };
         SIPortalLoader.prototype.initialize = function () {
-            this.app = appBuilder_1.compose(this.middlewares);
+            this.app = AppBuilder_1.compose(this.middlewares);
             window.addEventListener("hashchange", this.onHashChange.bind(this), false);
             this.onHashChange();
         };
