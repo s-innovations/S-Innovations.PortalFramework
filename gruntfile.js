@@ -18,7 +18,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-typings');
 
-    grunt.registerTask("initProject", ["clean:dev","bower:install", "typings:install"]);
+    grunt.registerTask("initProject", ["clean:dev", "bower:install", "typings:install"]);
     grunt.registerTask('devAfterBuild', ["sync:default", "dtsGenerator:default"]);
     grunt.registerTask('devWatch', ["devAfterBuild", "watch:default"]);
     grunt.registerTask("devBuildAndTest", ["devAfterBuild", "jasmine:tests"]);
@@ -26,7 +26,7 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         ts: {
-            distBuild : {
+            distBuild: {
                 tsconfig: true,
                 options: {
                     fast: "never",
@@ -38,7 +38,7 @@ module.exports = function (grunt) {
             install: {
                 options: {
                     targetDir: "wwwroot/libs",
-                    
+
                 }
             }
         },
@@ -56,11 +56,17 @@ module.exports = function (grunt) {
         },
         sync: {
             default: {
-                files: [{
-                    cwd: "src",
-                    src: ["**/*.d.ts"],
-                    dest: "dist/typings",
-                },
+                files: [
+                    {
+                        cwd: "typings/local",
+                        src: ["**/*.d.ts"],
+                        dest: "dist/typings",
+                    },
+                     {
+                         cwd: "src",
+                         src: ["**/*.d.ts","!vendors.d.ts"],
+                         dest: "dist/typings",
+                     },
                 {
                     cwd: "src",
                     src: ["**/*.less", "**/*.html"],
@@ -80,19 +86,19 @@ module.exports = function (grunt) {
             options: {
                 name: 'si-portal-framework',
                 baseDir: 'artifacts/dev',
-             //   project:"artifacts/dev",
-              //  src:["artifacts/dev/**/*.ts","typings/tsd.d.ts"],
+                //   project:"artifacts/dev",
+                //  src:["artifacts/dev/**/*.ts","typings/tsd.d.ts"],
                 out: 'dist/typings/si-portal-framework.d.ts',
-           //     exclude: ["typings/q/*.d.ts"],
-               
-             //   main: 'si-portal-framework/index',
+                //     exclude: ["typings/q/*.d.ts"],
+
+                //   main: 'si-portal-framework/index',
                 externs: ["./koExtensions/knockoutExtensions.d.ts", "./utils/utils.d.ts"]
 
             },
             default: {
                 src: ['artifacts/dev/**/*.d.ts'],
-                
-                
+
+
             }
         },
         jasmine: {
@@ -115,7 +121,7 @@ module.exports = function (grunt) {
         },
         typings: {
             'install': {
-               
+
             }
         },
     });

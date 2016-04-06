@@ -17,6 +17,7 @@
   "license": "MIT",
   "ignore": [
     "*",
+    "!typings.json",
     "!dist/**/*"
   ],
   "version": "0.8.1",
