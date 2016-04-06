@@ -1,6 +1,7 @@
 {
   "name": "si-portal-framework",
   "version": false,
+  "main":"dist/typings/si-portal-framework.d.ts",
   "ambientDependencies": {
     "classie": "file:typings/local/classie.d.ts",
     "knockout": "github:DefinitelyTyped/DefinitelyTyped/knockout/knockout.d.ts#247e8d48404d11f3aff85dea5029413229e0fc36",
