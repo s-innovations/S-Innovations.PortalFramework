@@ -17,6 +17,7 @@
     "bower_components",
     "wwwroot",
     "dist",
-    "tests"
+    "tests",
+    "typings"
   ]
 }

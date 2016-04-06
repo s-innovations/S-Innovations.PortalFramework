@@ -1,3 +1,5 @@
+/// <reference path="../typings/browser.d.ts" />
+
 interface ClassieStatic {
     has(el, cls: string): boolean;
     add(el, cls: string): void;

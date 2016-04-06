@@ -1,6 +1,6 @@
 
 
-/// <reference path="../typings/tsd.d.ts" />
+/// <reference path="../src/vendors.d.ts" />
 /// <reference path="../dist/typings/si-portal-framework.d.ts" />
 
 import makeModulePath = require("si-portal-framework/utils/makeModulePath");

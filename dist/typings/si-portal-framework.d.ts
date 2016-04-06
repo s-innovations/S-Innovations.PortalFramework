@@ -12,26 +12,27 @@ declare module 'si-portal-framework/appBuilder/compose' {
 }
 declare module 'si-portal-framework/appBuilder/AppBuilder' {
 	 import {compose} from 'si-portal-framework/appBuilder/compose';
-	interface AppEnvironmnet {
+	export interface AppEnvironmnet {
 	    hash: string;
 	    originalHash: string;
 	    route: string[];
 	    params: string;
 	    [key: string]: any;
 	}
-	interface AppFunc {
+	export interface AppFunc {
 	    (env: AppEnvironmnet): void;
 	}
-	interface Middleware {
+	export interface Middleware {
 	    (env: AppEnvironmnet, next: AppFunc): void | Q.Promise<void>;
-	} class AppBuilder<T extends AppEnvironmnet> {
+	}
+	export class AppBuilder<T extends AppEnvironmnet> {
 	    private middleware;
 	    constructor();
 	    build(): any;
 	    use(mw: any): this;
 	}
 	export default function <T extends AppEnvironmnet>(): AppBuilder<T>;
-	export { compose, AppBuilder, AppFunc, AppEnvironmnet, Middleware };
+	export { compose };
 
 }
 declare module 'si-portal-framework/koExtensions/koLayout' {

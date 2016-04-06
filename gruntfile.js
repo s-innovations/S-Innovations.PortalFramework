@@ -4,6 +4,10 @@
 This file in the main entry point for defining grunt tasks and using grunt plugins.
 Click here to learn more. http://go.microsoft.com/fwlink/?LinkID=513275&clcid=0x409
 */
+
+require('any-promise/register')('q')
+
+
 module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-bower-task');
     grunt.loadNpmTasks('grunt-sync');
@@ -12,9 +16,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('dts-generator');
     grunt.loadNpmTasks("grunt-ts");
     grunt.loadNpmTasks('grunt-contrib-jasmine');
-    grunt.loadNpmTasks('grunt-tsd');
+    grunt.loadNpmTasks('grunt-typings');
 
-    grunt.registerTask("initProject", ["clean:dev","bower:install", "tsd:refresh"]);
+    grunt.registerTask("initProject", ["clean:dev","bower:install", "typings:install"]);
     grunt.registerTask('devAfterBuild', ["sync:default", "dtsGenerator:default"]);
     grunt.registerTask('devWatch', ["devAfterBuild", "watch:default"]);
     grunt.registerTask("devBuildAndTest", ["devAfterBuild", "jasmine:tests"]);
@@ -26,6 +30,7 @@ module.exports = function (grunt) {
                 tsconfig: true,
                 options: {
                     fast: "never",
+                    verbose: true
                 }
             }
         },
@@ -108,14 +113,9 @@ module.exports = function (grunt) {
                 }
             }
         },
-        tsd: {
-            'refresh': {
-                'options': {
-                    'command': 'reinstall',
-                    'latest': true,
-                    'config': 'tsd.json',
-                    'opts': {}
-                }
+        typings: {
+            'install': {
+               
             }
         },
     });

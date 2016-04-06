@@ -1,7 +1,7 @@
 import { compose } from './compose'
 
 
-interface AppEnvironmnet {
+export interface AppEnvironmnet {
     hash: string
     originalHash: string
     route: string[];
@@ -9,15 +9,15 @@ interface AppEnvironmnet {
     [key: string]: any;
 }
 
-interface AppFunc {
+export interface AppFunc {
     (env: AppEnvironmnet): void;
 }
 
-interface Middleware {
+export interface Middleware {
     (env: AppEnvironmnet, next: AppFunc): void | Q.Promise<void>;
 }
 
-class AppBuilder<T extends AppEnvironmnet> {
+export class AppBuilder<T extends AppEnvironmnet> {
 
     private middleware = []
     constructor() {
@@ -46,8 +46,8 @@ export default function <T extends AppEnvironmnet>() {
 
 export {
 compose,
-AppBuilder,
-AppFunc,
-AppEnvironmnet,
-Middleware
+//AppBuilder,
+//AppFunc,
+//AppEnvironmnet,
+//Middleware
 }
