@@ -2,6 +2,7 @@
   "name": "si-portal-framework",
   "version": false,
   "ambientDependencies": {
+    "classie": "file:typings/local/classie.d.ts",
     "knockout": "github:DefinitelyTyped/DefinitelyTyped/knockout/knockout.d.ts#247e8d48404d11f3aff85dea5029413229e0fc36",
     "require": "github:DefinitelyTyped/DefinitelyTyped/requirejs/require.d.ts#247e8d48404d11f3aff85dea5029413229e0fc36",
     "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#247e8d48404d11f3aff85dea5029413229e0fc36",
