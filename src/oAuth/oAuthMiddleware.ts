@@ -12,7 +12,7 @@ export interface OAuthLoader {
 }
 export interface OAuthAppEnvironment<TUser extends OAuthUser, TLoader extends OAuthLoader> extends AppEnvironmnet {
     user: TUser;
-    loader: OAuthLoader
+    loader: TLoader
 }
 
 

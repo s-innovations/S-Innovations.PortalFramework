@@ -76,7 +76,7 @@ declare module 'si-portal-framework/oAuth/OAuthMiddleware' {
 	}
 	export interface OAuthAppEnvironment<TUser extends OAuthUser, TLoader extends OAuthLoader> extends AppEnvironmnet {
 	    user: TUser;
-	    loader: OAuthLoader;
+	    loader: TLoader;
 	}
 	export function OAuthMiddleware<TUser extends OAuthUser, TLoader extends OAuthLoader>(envOrOptions: OAuthAppEnvironment<TUser, TLoader> | any, envOrNext: OAuthAppEnvironment<TUser, TLoader> | AppFunc, nextOrnull: AppFunc | void): void;
 
