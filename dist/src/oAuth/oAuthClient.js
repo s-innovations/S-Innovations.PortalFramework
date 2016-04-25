@@ -1,12 +1,12 @@
-define(["require", "exports", "q", "./oAuthResult"], function (require, exports, q_1, oAuthResult_1) {
-    var oAuthClient = (function () {
-        function oAuthClient(url) {
+define(["require", "exports", "q", "./OAuthResult"], function (require, exports, q_1, OAuthResult_1) {
+    var OAuthClient = (function () {
+        function OAuthClient(url) {
             this.url = url;
         }
-        oAuthClient.prototype.setUrl = function (url) {
+        OAuthClient.prototype.setUrl = function (url) {
             this.url = url;
         };
-        oAuthClient.prototype.createSilentImplicitFlow = function (clientid, callback, scope, responseType) {
+        OAuthClient.prototype.createSilentImplicitFlow = function (clientid, callback, scope, responseType) {
             if (responseType === void 0) { responseType = "token"; }
             if (!this.url)
                 throw new Error();
@@ -46,7 +46,7 @@ define(["require", "exports", "q", "./oAuthResult"], function (require, exports,
             iframe.onload = function (e) { return e.target.contentWindow.postMessage(request.url, callback); };
             return deferred.promise;
         };
-        oAuthClient.prototype.createImplicitFlowRequest = function (clientid, callback, scope, options) {
+        OAuthClient.prototype.createImplicitFlowRequest = function (clientid, callback, scope, options) {
             var state = ((Date.now() + Math.random()) * Math.random())
                 .toString().replace(".", "");
             var nonce = ((Date.now() + Math.random()) * Math.random())
@@ -73,23 +73,22 @@ define(["require", "exports", "q", "./oAuthResult"], function (require, exports,
                 nonce: nonce
             };
         };
-        oAuthClient.prototype.parseResult = function (queryStringOrParams) {
-            if (typeof (queryStringOrParams) === "string") {
+        OAuthClient.prototype.parseResult = function (queryStringOrParams) {
+            if (typeof queryStringOrParams === "string") {
                 var params = {}, regex = /([^&=]+)=([^&]*)/g, m;
                 while (m = regex.exec(queryStringOrParams)) {
                     params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
                 }
                 for (var prop in params) {
-                    return new oAuthResult_1.default(this, params);
+                    return new OAuthResult_1.OAuthResult(this, params);
                 }
             }
             else {
-                return new oAuthResult_1.default(this, queryStringOrParams);
+                return new OAuthResult_1.OAuthResult(this, queryStringOrParams);
             }
         };
-        return oAuthClient;
+        return OAuthClient;
     })();
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = oAuthClient;
+    exports.OAuthClient = OAuthClient;
 });
-//# sourceMappingURL=oAuthClient.js.map
+//# sourceMappingURL=OAuthClient.js.map

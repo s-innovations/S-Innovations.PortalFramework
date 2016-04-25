@@ -65,6 +65,53 @@ declare module 'si-portal-framework/koExtensions/template' {
 	export = loader;
 
 }
+declare module 'si-portal-framework/oAuth/OAuthResult' {
+	 import {OAuthClient} from 'si-portal-framework/oAuth/OAuthClient';
+	export interface OAuthResultProperties {
+	    id_token: string;
+	    access_token: string;
+	    expires_in: number | string;
+	    scope: string;
+	    state: string;
+	    token_type: string;
+	    expires_at?: number;
+	}
+	export class OAuthResult {
+	    client: OAuthClient;
+	    constructor(client: OAuthClient, data: OAuthResultProperties);
+	    id_token: string;
+	    access_token: string;
+	    expires_in: number;
+	    scope: string;
+	    state: string;
+	    token_type: string;
+	    expires_at: number;
+	}
+
+}
+declare module 'si-portal-framework/oAuth/OAuthClient' {
+	 import {OAuthResult, OAuthResultProperties} from 'si-portal-framework/oAuth/OAuthResult';
+	export interface ImplicitRequestOptions {
+	    responseType: string;
+	    prompt?: string;
+	    login_hint?: string;
+	    acr_values?: string;
+	    isSilence?: boolean;
+	}
+	export class OAuthClient {
+	    url: any;
+	    constructor(url?: any);
+	    setUrl(url: any): void;
+	    createSilentImplicitFlow(clientid: any, callback: any, scope: any, responseType?: string): Q.Promise<{}>;
+	    createImplicitFlowRequest(clientid: any, callback: any, scope: any, options: ImplicitRequestOptions): {
+	        url: string;
+	        state: string;
+	        nonce: string;
+	    };
+	    parseResult(queryStringOrParams: string | OAuthResultProperties): OAuthResult;
+	}
+
+}
 declare module 'si-portal-framework/oAuth/OAuthMiddleware' {
 	 import {AppEnvironmnet, AppFunc} from 'si-portal-framework/appBuilder/AppBuilder';
 	export interface OAuthUser {
@@ -81,62 +128,19 @@ declare module 'si-portal-framework/oAuth/OAuthMiddleware' {
 	export function OAuthMiddleware<TUser extends OAuthUser, TLoader extends OAuthLoader>(envOrOptions: OAuthAppEnvironment<TUser, TLoader> | any, envOrNext: OAuthAppEnvironment<TUser, TLoader> | AppFunc, nextOrnull: AppFunc | void): void;
 
 }
-declare module 'si-portal-framework/oAuth/implicitRequestOptions' {
-	interface implicitRequestOptions {
-	    responseType: string;
-	    prompt?: string;
-	    login_hint?: string;
-	    acr_values?: string;
-	    isSilence?: boolean;
-	}
-	export = implicitRequestOptions;
-
-}
-declare module 'si-portal-framework/oAuth/oAuthClient' {
-	 import oAuthResult from 'si-portal-framework/oAuth/oAuthResult';
-	import implicitRequestOptions = require('si-portal-framework/oAuth/implicitRequestOptions');
-	export default class oAuthClient {
-	    url: any;
-	    constructor(url?: any);
-	    setUrl(url: any): void;
-	    createSilentImplicitFlow(clientid: any, callback: any, scope: any, responseType?: string): Q.Promise<{}>;
-	    createImplicitFlowRequest(clientid: any, callback: any, scope: any, options: implicitRequestOptions): {
-	        url: string;
-	        state: string;
-	        nonce: string;
-	    };
-	    parseResult(queryStringOrParams: any): oAuthResult;
-	}
-
-}
-declare module 'si-portal-framework/oAuth/oAuthResult' {
-	 import oAuthClient from 'si-portal-framework/oAuth/oAuthClient';
-	export default class oAuthResult {
-	    client: oAuthClient;
-	    constructor(client: oAuthClient, data: any);
-	    id_token: string;
-	    access_token: string;
-	    expires_in: number;
-	    scope: string;
-	    state: string;
-	    token_type: string;
-	    expires_at: number;
-	}
-
-}
 declare module 'si-portal-framework/oAuth/getStoredTokens' {
-	 import oAuthResult from 'si-portal-framework/oAuth/oAuthResult';
-	export default function getStoredTokens(ns: string): oAuthResult;
+	 import {OAuthResultProperties} from 'si-portal-framework/oAuth/OAuthResult';
+	export default function getStoredTokens(ns: string): OAuthResultProperties;
 
 }
 declare module 'si-portal-framework/oAuth/setToken' {
-	 import oAuthResult from 'si-portal-framework/oAuth/oAuthResult';
-	export default function setToken(ns: string, result: oAuthResult): void;
+	 import {OAuthResult} from 'si-portal-framework/oAuth/OAuthResult';
+	export default function setToken(ns: string, result: OAuthResult): void;
 
 }
-declare module 'si-portal-framework/oAuth/oAuthModule' {
-	 import oAuthClient from 'si-portal-framework/oAuth/oAuthClient'; import oAuthResult from 'si-portal-framework/oAuth/oAuthResult'; import getStoredTokens from 'si-portal-framework/oAuth/getStoredTokens'; import setToken from 'si-portal-framework/oAuth/setToken';
-	export { oAuthClient, oAuthResult, getStoredTokens, setToken };
+declare module 'si-portal-framework/oAuth/OAuthModule' {
+	 import {OAuthClient} from 'si-portal-framework/oAuth/OAuthClient'; import {OAuthResult} from 'si-portal-framework/oAuth/OAuthResult'; import getStoredTokens from 'si-portal-framework/oAuth/getStoredTokens'; import setToken from 'si-portal-framework/oAuth/setToken';
+	export { OAuthClient, OAuthResult, getStoredTokens, setToken };
 
 }
 interface String {

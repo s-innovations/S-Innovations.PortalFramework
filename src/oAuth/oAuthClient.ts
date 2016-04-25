@@ -1,9 +1,16 @@
 
 import {defer} from "q";
-import oAuthResult from "./oAuthResult";
-import implicitRequestOptions = require("./implicitRequestOptions");
+import {OAuthResult, OAuthResultProperties} from "./OAuthResult";
 
-export default class oAuthClient {
+export interface ImplicitRequestOptions {
+    responseType: string;
+    prompt?: string;
+    login_hint?: string;
+    acr_values?: string;
+    isSilence?: boolean;
+}
+
+export class OAuthClient {
     constructor(public url?) {
 
     }
@@ -59,7 +66,7 @@ export default class oAuthClient {
         return deferred.promise;
     }
 
-    createImplicitFlowRequest(clientid, callback, scope, options: implicitRequestOptions) {
+    createImplicitFlowRequest(clientid, callback, scope, options: ImplicitRequestOptions) {
 
 
         var state = ((Date.now() + Math.random()) * Math.random())
@@ -93,8 +100,8 @@ export default class oAuthClient {
         };
     }
 
-    parseResult(queryStringOrParams) {
-        if (typeof (queryStringOrParams) === "string") {
+    parseResult(queryStringOrParams: string | OAuthResultProperties) {
+        if (typeof queryStringOrParams === "string") {
             var params = {},
                 regex = /([^&=]+)=([^&]*)/g,
                 m;
@@ -104,10 +111,10 @@ export default class oAuthClient {
             }
 
             for (var prop in params) {
-                return new oAuthResult(this, params);
+                return new OAuthResult(this, <OAuthResultProperties>params);
             }
         } else {
-            return new oAuthResult(this, queryStringOrParams);
+            return new OAuthResult(this, queryStringOrParams);
         }
     }
 

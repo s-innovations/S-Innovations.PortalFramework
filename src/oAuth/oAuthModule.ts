@@ -1,8 +1,8 @@
 
 
-import oAuthClient from "./oAuthClient";
-import oAuthResult from "./oAuthResult";
+import {OAuthClient} from "./OAuthClient";
+import {OAuthResult} from "./OAuthResult";
 import getStoredTokens from "./getStoredTokens";
 import setToken from "./setToken";
 
-export {oAuthClient, oAuthResult, getStoredTokens,setToken};
+export {OAuthClient, OAuthResult, getStoredTokens,setToken};
