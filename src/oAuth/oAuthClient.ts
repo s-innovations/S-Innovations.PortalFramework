@@ -10,6 +10,10 @@ export interface ImplicitRequestOptions {
     isSilence?: boolean;
 }
 
+export interface ImplicitRequestError {
+
+}
+
 export class OAuthClient {
     constructor(public url?) {
 
@@ -24,7 +28,7 @@ export class OAuthClient {
         if (!this.url)
             throw new Error();
 
-        var deferred = defer();
+        var deferred = defer<OAuthResultProperties>();
 
         var request = this.createImplicitFlowRequest(clientid, callback, scope, { responseType: responseType, prompt: "none", isSilence: true });
 

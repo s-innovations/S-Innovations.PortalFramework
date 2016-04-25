@@ -1,4 +1,7 @@
 define(["require", "exports"], function (require, exports) {
+    function isOAuthRequestState(value) {
+        return "token_type" in value;
+    }
     function parseExpiresIn(value) {
         if (typeof value === "string")
             return parseFloat(value);
@@ -8,7 +11,7 @@ define(["require", "exports"], function (require, exports) {
     var OAuthResult = (function () {
         function OAuthResult(client, data) {
             this.client = client;
-            if (data) {
+            if (isOAuthRequestState(data)) {
                 this.id_token = data.id_token;
                 this.expires_in = parseExpiresIn(data.expires_in);
                 this.scope = data.scope;
@@ -16,6 +19,9 @@ define(["require", "exports"], function (require, exports) {
                 this.token_type = data.token_type;
                 this.access_token = data.access_token;
                 this.expires_at = data.expires_at || new Date().getTime() + this.expires_in * 1000;
+            }
+            else {
+                this.state = data.state;
             }
         }
         return OAuthResult;

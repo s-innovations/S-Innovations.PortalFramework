@@ -67,18 +67,20 @@ declare module 'si-portal-framework/koExtensions/template' {
 }
 declare module 'si-portal-framework/oAuth/OAuthResult' {
 	 import {OAuthClient} from 'si-portal-framework/oAuth/OAuthClient';
-	export interface OAuthResultProperties {
+	export interface OAuthRequestState {
+	    state: string;
+	}
+	export interface OAuthResultProperties extends OAuthRequestState {
 	    id_token: string;
 	    access_token: string;
 	    expires_in: number | string;
 	    scope: string;
-	    state: string;
 	    token_type: string;
 	    expires_at?: number;
 	}
 	export class OAuthResult {
 	    client: OAuthClient;
-	    constructor(client: OAuthClient, data: OAuthResultProperties);
+	    constructor(client: OAuthClient, data: OAuthRequestState | OAuthResultProperties);
 	    id_token: string;
 	    access_token: string;
 	    expires_in: number;
@@ -98,11 +100,13 @@ declare module 'si-portal-framework/oAuth/OAuthClient' {
 	    acr_values?: string;
 	    isSilence?: boolean;
 	}
+	export interface ImplicitRequestError {
+	}
 	export class OAuthClient {
 	    url: any;
 	    constructor(url?: any);
 	    setUrl(url: any): void;
-	    createSilentImplicitFlow(clientid: any, callback: any, scope: any, responseType?: string): Q.Promise<{}>;
+	    createSilentImplicitFlow(clientid: any, callback: any, scope: any, responseType?: string): Q.Promise<OAuthResultProperties>;
 	    createImplicitFlowRequest(clientid: any, callback: any, scope: any, options: ImplicitRequestOptions): {
 	        url: string;
 	        state: string;
