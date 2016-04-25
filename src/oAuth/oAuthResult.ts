@@ -15,7 +15,7 @@ export interface OAuthResultProperties extends OAuthRequestState {
 }
 
 function isOAuthRequestState(value: OAuthRequestState | OAuthResultProperties): value is OAuthResultProperties {
-    return value && "token_type" in value;
+    return  "token_type" in value;
 }
 function parseExpiresIn(value: string | number) {
     if (typeof value === "string")
@@ -26,18 +26,20 @@ function parseExpiresIn(value: string | number) {
 export class OAuthResult {
 
 
-    constructor(public client: OAuthClient, data?: OAuthRequestState| OAuthResultProperties) {
-        if (isOAuthRequestState(data)) {
+    constructor(public client: OAuthClient, data?: OAuthRequestState | OAuthResultProperties) {
+        if (data) {
+            if (isOAuthRequestState(data)) {
 
-            this.id_token = data.id_token;
-            this.expires_in = parseExpiresIn(data.expires_in);
-            this.scope = data.scope;
-            this.state = data.state;
-            this.token_type = data.token_type;
-            this.access_token = data.access_token;
-            this.expires_at = data.expires_at || new Date().getTime() + this.expires_in * 1000;
-        } else {
-            this.state = data.state;
+                this.id_token = data.id_token;
+                this.expires_in = parseExpiresIn(data.expires_in);
+                this.scope = data.scope;
+                this.state = data.state;
+                this.token_type = data.token_type;
+                this.access_token = data.access_token;
+                this.expires_at = data.expires_at || new Date().getTime() + this.expires_in * 1000;
+            } else {
+                this.state = data.state;
+            }
         }
     }
 
