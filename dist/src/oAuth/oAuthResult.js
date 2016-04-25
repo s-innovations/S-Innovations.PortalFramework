@@ -9,7 +9,7 @@ define(["require", "exports"], function (require, exports) {
                 this.state = data.state;
                 this.token_type = data.token_type;
                 this.access_token = data.access_token;
-                this.expires_at = new Date().getTime() + parseFloat(data.expires_in);
+                this.expires_at = new Date().getTime() + parseFloat(data.expires_in) * 1000;
             }
         }
         return oAuthResult;

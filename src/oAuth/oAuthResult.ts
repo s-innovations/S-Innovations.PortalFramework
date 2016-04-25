@@ -14,7 +14,7 @@ export default class oAuthResult {
             this.state = data.state;
             this.token_type = data.token_type;
             this.access_token = data.access_token;
-            this.expires_at = new Date().getTime() + parseFloat((<string>data.expires_in));
+            this.expires_at = new Date().getTime() + parseFloat((<string>data.expires_in)) * 1000;
         }
     }
 
