@@ -36,7 +36,7 @@ export function OAuthMiddleware<TUser extends OAuthUser, TLoader extends OAuthLo
                 window.sessionStorage.removeItem("afterAuthenticationAction");
                 window.location.hash = action;
             } else {
-                env["loader"].cleanUpHash();
+                env.loader.cleanUpHash();
             }
         }
         return;

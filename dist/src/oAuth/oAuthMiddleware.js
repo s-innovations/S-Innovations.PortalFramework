@@ -18,7 +18,7 @@ define(["require", "exports"], function (require, exports) {
                     window.location.hash = action;
                 }
                 else {
-                    env["loader"].cleanUpHash();
+                    env.loader.cleanUpHash();
                 }
             }
             return;
