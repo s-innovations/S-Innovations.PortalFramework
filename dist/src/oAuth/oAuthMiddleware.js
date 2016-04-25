@@ -1,5 +1,5 @@
 define(["require", "exports"], function (require, exports) {
-    function oAuthMiddleware(envOrOptions, envOrNext, nextOrnull) {
+    function OAuthMiddleware(envOrOptions, envOrNext, nextOrnull) {
         var env = (arguments.length === 2 ? envOrOptions : envOrNext);
         var next = (arguments.length === 2 ? envOrNext : nextOrnull);
         var options = arguments.length === 2 ? {} : envOrOptions;
@@ -25,6 +25,6 @@ define(["require", "exports"], function (require, exports) {
         }
         return next(env);
     }
-    exports.oAuthMiddleware = oAuthMiddleware;
+    exports.OAuthMiddleware = OAuthMiddleware;
 });
-//# sourceMappingURL=oAuthMiddleware.js.map
+//# sourceMappingURL=OAuthMiddleware.js.map

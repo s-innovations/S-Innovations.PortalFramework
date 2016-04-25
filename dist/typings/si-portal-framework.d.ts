@@ -65,6 +65,22 @@ declare module 'si-portal-framework/koExtensions/template' {
 	export = loader;
 
 }
+declare module 'si-portal-framework/oAuth/OAuthMiddleware' {
+	 import {AppEnvironmnet, AppFunc} from 'si-portal-framework/appBuilder/AppBuilder';
+	export interface OAuthUser {
+	    handleAuthorizationCallback(params: string): any;
+	    clearCache(): void;
+	}
+	export interface OAuthLoader {
+	    cleanUpHash(): void;
+	}
+	export interface OAuthAppEnvironment<TUser extends OAuthUser, TLoader extends OAuthLoader> extends AppEnvironmnet {
+	    user: TUser;
+	    loader: OAuthLoader;
+	}
+	export function OAuthMiddleware<TUser extends OAuthUser, TLoader extends OAuthLoader>(envOrOptions: OAuthAppEnvironment<TUser, TLoader> | any, envOrNext: OAuthAppEnvironment<TUser, TLoader> | AppFunc, nextOrnull: AppFunc | void): void;
+
+}
 declare module 'si-portal-framework/oAuth/implicitRequestOptions' {
 	interface implicitRequestOptions {
 	    responseType: string;
@@ -111,14 +127,6 @@ declare module 'si-portal-framework/oAuth/oAuthResult' {
 declare module 'si-portal-framework/oAuth/getStoredTokens' {
 	 import oAuthResult from 'si-portal-framework/oAuth/oAuthResult';
 	export default function getStoredTokens(ns: string): oAuthResult;
-
-}
-declare module 'si-portal-framework/oAuth/oAuthMiddleware' {
-	 import {AppEnvironmnet, AppFunc} from 'si-portal-framework/appBuilder/AppBuilder';
-	export interface oAuthAppEnvironment extends AppEnvironmnet {
-	    user: any;
-	}
-	export function oAuthMiddleware(envOrOptions: oAuthAppEnvironment | any, envOrNext: oAuthAppEnvironment | AppFunc, nextOrnull: AppFunc | void): void;
 
 }
 declare module 'si-portal-framework/oAuth/setToken' {

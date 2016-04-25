@@ -1,12 +1,23 @@
 
 
 import { AppEnvironmnet, AppFunc } from '../appBuilder/AppBuilder';
-export interface oAuthAppEnvironment extends AppEnvironmnet {
-    user: any;
+
+export interface OAuthUser {
+    handleAuthorizationCallback(params: string);
+    clearCache(): void;
+
+}
+export interface OAuthLoader {
+    cleanUpHash(): void;
+}
+export interface OAuthAppEnvironment<TUser extends OAuthUser, TLoader extends OAuthLoader> extends AppEnvironmnet {
+    user: TUser;
+    loader: OAuthLoader
 }
 
-export function oAuthMiddleware(envOrOptions: oAuthAppEnvironment | any, envOrNext: oAuthAppEnvironment | AppFunc, nextOrnull: AppFunc | void) {
-    let env = (arguments.length === 2 ? envOrOptions : envOrNext) as oAuthAppEnvironment;
+
+export function OAuthMiddleware<TUser extends OAuthUser, TLoader extends OAuthLoader>(envOrOptions: OAuthAppEnvironment<TUser, TLoader> | any, envOrNext: OAuthAppEnvironment<TUser, TLoader> | AppFunc, nextOrnull: AppFunc | void) {
+    let env = (arguments.length === 2 ? envOrOptions : envOrNext) as OAuthAppEnvironment<TUser, TLoader>;
     let next = (arguments.length === 2 ? envOrNext : nextOrnull) as AppFunc;
     let options = arguments.length === 2 ? {} : envOrOptions;
 
