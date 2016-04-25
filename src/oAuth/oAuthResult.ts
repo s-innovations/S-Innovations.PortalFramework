@@ -15,7 +15,7 @@ export interface OAuthResultProperties extends OAuthRequestState {
 }
 
 function isOAuthRequestState(value: OAuthRequestState | OAuthResultProperties): value is OAuthResultProperties {
-    return "token_type" in value;
+    return value && "token_type" in value;
 }
 function parseExpiresIn(value: string | number) {
     if (typeof value === "string")
@@ -26,7 +26,7 @@ function parseExpiresIn(value: string | number) {
 export class OAuthResult {
 
 
-    constructor(public client: OAuthClient, data: OAuthRequestState| OAuthResultProperties) {
+    constructor(public client: OAuthClient, data?: OAuthRequestState| OAuthResultProperties) {
         if (isOAuthRequestState(data)) {
 
             this.id_token = data.id_token;

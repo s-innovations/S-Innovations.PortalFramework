@@ -80,7 +80,7 @@ declare module 'si-portal-framework/oAuth/OAuthResult' {
 	}
 	export class OAuthResult {
 	    client: OAuthClient;
-	    constructor(client: OAuthClient, data: OAuthRequestState | OAuthResultProperties);
+	    constructor(client: OAuthClient, data?: OAuthRequestState | OAuthResultProperties);
 	    id_token: string;
 	    access_token: string;
 	    expires_in: number;

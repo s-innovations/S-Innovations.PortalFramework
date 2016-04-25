@@ -1,6 +1,6 @@
 define(["require", "exports"], function (require, exports) {
     function isOAuthRequestState(value) {
-        return "token_type" in value;
+        return value && "token_type" in value;
     }
     function parseExpiresIn(value) {
         if (typeof value === "string")
