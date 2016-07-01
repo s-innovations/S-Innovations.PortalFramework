@@ -47,13 +47,16 @@ define(["require", "exports", "q", "./OAuthResult"], function (require, exports,
             return deferred.promise;
         };
         OAuthClient.prototype.createImplicitFlowRequest = function (clientid, callback, scope, options) {
+            if (callback[callback.length - 1] === "/") {
+                callback = callback.slice(0, callback.length - 1);
+            }
             var state = ((Date.now() + Math.random()) * Math.random())
                 .toString().replace(".", "");
             var nonce = ((Date.now() + Math.random()) * Math.random())
                 .toString().replace(".", "");
             var url = this.url + "?" +
                 "client_id=" + encodeURIComponent(clientid) + "&" +
-                "redirect_uri=" + encodeURIComponent(callback + (options.isSilence ? "/iframe.html" : "")) + "&" +
+                "redirect_uri=" + encodeURIComponent(callback + (options.isSilence ? "iframe.html" : "/")) + "&" +
                 "response_type=" + encodeURIComponent(options.responseType) + "&" +
                 "scope=" + encodeURIComponent(scope) + "&" +
                 "state=" + encodeURIComponent(state) + "&" +

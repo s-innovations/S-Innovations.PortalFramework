@@ -37,7 +37,7 @@ declare module 'si-portal-framework/appBuilder/AppBuilder' {
 }
 declare module 'si-portal-framework/koExtensions/koLayout' {
 	interface koLayout {
-	    templateOptions(): KnockoutTemplateBindingHandlerOptions;
+	    templateOptions(element?: HTMLElement): KnockoutTemplateBindingHandlerOptions;
 	}
 	export = koLayout;
 
@@ -107,7 +107,7 @@ declare module 'si-portal-framework/oAuth/OAuthClient' {
 	    constructor(url?: any);
 	    setUrl(url: any): void;
 	    createSilentImplicitFlow(clientid: any, callback: any, scope: any, responseType?: string): Q.Promise<OAuthResultProperties>;
-	    createImplicitFlowRequest(clientid: any, callback: any, scope: any, options: ImplicitRequestOptions): {
+	    createImplicitFlowRequest(clientid: any, callback: string, scope: any, options: ImplicitRequestOptions): {
 	        url: string;
 	        state: string;
 	        nonce: string;

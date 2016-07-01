@@ -6,7 +6,7 @@ import isDefined = require("../utils/isDefined");
 
 interface koLayout {
 
-    templateOptions(): KnockoutTemplateBindingHandlerOptions;
+    templateOptions(element?: HTMLElement): KnockoutTemplateBindingHandlerOptions;
 
 }
 

@@ -70,8 +70,11 @@ export class OAuthClient {
         return deferred.promise;
     }
 
-    createImplicitFlowRequest(clientid, callback, scope, options: ImplicitRequestOptions) {
+    createImplicitFlowRequest(clientid, callback: string, scope, options: ImplicitRequestOptions) {
 
+        if (callback[callback.length - 1] === "/") {
+            callback = callback.slice(0, callback.length - 1);
+        }
 
         var state = ((Date.now() + Math.random()) * Math.random())
             .toString().replace(".", "");
@@ -81,7 +84,7 @@ export class OAuthClient {
         var url =
             this.url + "?" +
             "client_id=" + encodeURIComponent(clientid) + "&" +
-            "redirect_uri=" + encodeURIComponent(callback + (options.isSilence ? "/iframe.html" : "")) + "&" +
+            "redirect_uri=" + encodeURIComponent(callback + (options.isSilence ? "iframe.html" : "/")) + "&" +
             "response_type=" + encodeURIComponent(options.responseType) + "&" +
             "scope=" + encodeURIComponent(scope) + "&" +
             "state=" + encodeURIComponent(state) + "&" +
