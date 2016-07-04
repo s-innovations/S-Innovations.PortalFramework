@@ -56,7 +56,7 @@ define(["require", "exports", "q", "./OAuthResult"], function (require, exports,
                 .toString().replace(".", "");
             var url = this.url + "?" +
                 "client_id=" + encodeURIComponent(clientid) + "&" +
-                "redirect_uri=" + encodeURIComponent(callback + (options.isSilence ? "iframe.html" : "/")) + "&" +
+                "redirect_uri=" + encodeURIComponent(callback + (options.isSilence ? "/iframe.html" : "/")) + "&" +
                 "response_type=" + encodeURIComponent(options.responseType) + "&" +
                 "scope=" + encodeURIComponent(scope) + "&" +
                 "state=" + encodeURIComponent(state) + "&" +
