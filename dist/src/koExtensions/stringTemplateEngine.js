@@ -19,7 +19,7 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
                 var template = templates[this.templateName];
                 if (typeof (template) === 'undefined') {
                     // throw Error("Template not found: " + this.templateName);
-                    return "<div>Template not found: " + this.templateName + "</div>";
+                    return this.templateName; // "<div>Template not found: " + this.templateName + "</div>";
                 }
                 return template;
             }

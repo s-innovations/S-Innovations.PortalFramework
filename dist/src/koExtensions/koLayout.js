@@ -22,7 +22,7 @@ define(["require", "exports", "knockout", "../utils/isDefined"], function (requi
             var layout = ko.utils.unwrapObservable(vm);
             if (isDefined(layout)) {
                 return ko.bindingHandlers.template.init.apply(this, [
-                    element, layout.templateOptions.bind(layout, element), allBindingsAccessor, viewModel, bindingContext
+                    element, layout.templateOptions.bind(layout, element, true), allBindingsAccessor, viewModel, bindingContext
                 ]);
             }
             else {
@@ -31,8 +31,12 @@ define(["require", "exports", "knockout", "../utils/isDefined"], function (requi
         update: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
             var layout = ko.utils.unwrapObservable(valueAccessor());
             if (isDefined(layout)) {
+                var init = !isDefined(ko.utils.domData.get(element, "kolayout_init"));
+                if (init) {
+                    ko.utils.domData.set(element, "kolayout_init", true);
+                }
                 return ko.bindingHandlers.template.update.apply(this, [
-                    element, layout.templateOptions.bind(layout, element), allBindingsAccessor, viewModel, bindingContext
+                    element, layout.templateOptions.bind(layout, element, init), allBindingsAccessor, viewModel, bindingContext
                 ]);
             }
             else {

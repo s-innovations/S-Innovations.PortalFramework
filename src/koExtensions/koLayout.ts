@@ -47,9 +47,10 @@ ko.bindingHandlers.koLayout = {
         if (isDefined(layout)) {                                      
             
             return ko.bindingHandlers.template.init.apply(this, [
-                element, layout.templateOptions.bind(layout,element), allBindingsAccessor, viewModel, bindingContext
+                element, layout.templateOptions.bind(layout,element,true), allBindingsAccessor, viewModel, bindingContext
             ]);
         } else {
+           
           //Do nothing, update will handle if it was observable.
         }
     },
@@ -59,9 +60,13 @@ ko.bindingHandlers.koLayout = {
         var layout = ko.utils.unwrapObservable<koLayout>(valueAccessor());
 
         if (isDefined(layout)) {
+            let init = !isDefined(ko.utils.domData.get(element, "kolayout_init"));
+            if (init) {
+                ko.utils.domData.set(element, "kolayout_init", true)
+            }
             
             return ko.bindingHandlers.template.update.apply(this, [
-                element, layout.templateOptions.bind(layout,element), allBindingsAccessor, viewModel, bindingContext
+                element, layout.templateOptions.bind(layout, element, init), allBindingsAccessor, viewModel, bindingContext
             ]);
         } else {    
             //Clean out template
