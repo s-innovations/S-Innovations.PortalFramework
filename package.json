@@ -19,6 +19,7 @@
     "q": "1.4.1"
   },
   "typescript": {
-    "definition": "./dist/typings/si-portal-framework.d.ts"
-  }
+    "definition": "dist/typings/si-portal-framework.d.ts"
+  },
+  "typings": "dist/typings/si-portal-framework.d.ts"
 }
